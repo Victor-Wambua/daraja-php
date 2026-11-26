@@ -9,3 +9,4 @@
 *.sqlite-shm
 .env
 .DS_Store
+composer.lock
