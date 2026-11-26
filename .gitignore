@@ -1,0 +1,11 @@
+/vendor/
+/.phpunit.cache/
+/.phpstan.cache/
+/.php-cs-fixer.cache
+/composer.phar
+/var/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+.env
+.DS_Store
