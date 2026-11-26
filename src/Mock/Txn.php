@@ -37,8 +37,8 @@ final readonly class Txn
     public static function fromRow(array $row): self
     {
         $s = static fn (string $k): string => \is_scalar($row[$k] ?? null) ? (string) $row[$k] : '';
-        $i = static fn (string $k): int => \is_numeric($row[$k] ?? null) ? (int) $row[$k] : 0;
-        $f = static fn (string $k): ?float => \is_numeric($row[$k] ?? null) ? (float) $row[$k] : null;
+        $i = static fn (string $k): int => is_numeric($row[$k] ?? null) ? (int) $row[$k] : 0;
+        $f = static fn (string $k): ?float => is_numeric($row[$k] ?? null) ? (float) $row[$k] : null;
 
         return new self(
             id: $i('id'),
@@ -56,7 +56,7 @@ final readonly class Txn
             accountReference: $s('account_reference'),
             description: $s('description'),
             callbackUrl: $s('callback_url'),
-            resultCode: \is_numeric($row['result_code'] ?? null) ? (int) $row['result_code'] : null,
+            resultCode: is_numeric($row['result_code'] ?? null) ? (int) $row['result_code'] : null,
             resultDesc: $s('result_desc'),
             receipt: $s('receipt'),
             createdAt: $f('created_at') ?? 0.0,

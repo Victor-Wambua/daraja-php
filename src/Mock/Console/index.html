@@ -1,1 +1,709 @@
-<!doctype html><title>console</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>daraja-mock console</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2314213D'/%3E%3Cpath d='M5 21c3-9 19-9 22 0' fill='none' stroke='%23FCA311' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M4 22h24' stroke='%23fff' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root {
+  color-scheme: light dark;
+  --navy: #14213D;
+  --amber: #FCA311;
+  --amber-ink: #14213D;
+  --bg: #F4F2EC;
+  --surface: #FFFFFF;
+  --surface-2: #F9F8F4;
+  --ink: #14213D;
+  --muted: #566075;
+  --line: #E1DDD1;
+  --ok: #146C43;
+  --ok-bg: #E2F3E9;
+  --warn: #7A4F00;
+  --warn-bg: #FFF0D0;
+  --bad: #A8231B;
+  --bad-bg: #FBE3E0;
+  --info: #264A8F;
+  --info-bg: #E5ECF9;
+  --focus: #1F5FD6;
+  --shadow: 0 1px 2px rgb(20 33 61 / 8%), 0 8px 24px rgb(20 33 61 / 6%);
+  --radius: 12px;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+:root[data-theme="dark"] {
+  --bg: #0A1120; --surface: #111A30; --surface-2: #0E1628; --ink: #EDF0F7; --muted: #9DA9C2; --line: #24304D;
+  --ok: #67D49B; --ok-bg: #12352A; --warn: #FFC95C; --warn-bg: #3A2A07; --bad: #FF8E86; --bad-bg: #3F1714;
+  --info: #9DBBFF; --info-bg: #17284A; --focus: #7FA8FF; --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 8px 24px rgb(0 0 0 / 30%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A1120; --surface: #111A30; --surface-2: #0E1628; --ink: #EDF0F7; --muted: #9DA9C2; --line: #24304D;
+    --ok: #67D49B; --ok-bg: #12352A; --warn: #FFC95C; --warn-bg: #3A2A07; --bad: #FF8E86; --bad-bg: #3F1714;
+    --info: #9DBBFF; --info-bg: #17284A; --focus: #7FA8FF; --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 8px 24px rgb(0 0 0 / 30%);
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- header ---------- */
+.top {
+  display: flex; align-items: center; gap: 16px; padding: 14px 24px;
+  background: var(--navy); color: #fff;
+}
+.brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.brand svg { flex: none; }
+.brand b { font-size: 16px; letter-spacing: .01em; }
+.brand span { color: #B8C2DA; font-size: 13px; }
+.top .grow { flex: 1; }
+.live {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: #D5DCEC;
+  padding: 6px 12px; border: 1px solid rgb(255 255 255 / 18%); border-radius: 999px; white-space: nowrap;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #67D49B; box-shadow: 0 0 0 0 rgb(103 212 155 / 60%); }
+.live[data-ok="false"] .dot { background: #FF8E86; }
+.live[data-ok="true"] .dot { animation: pulse 2s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 7px rgb(103 212 155 / 0%); } 100% { box-shadow: 0 0 0 0 rgb(103 212 155 / 0%); } }
+.icon-btn {
+  display: inline-grid; place-items: center; width: 36px; height: 36px; background: transparent;
+  border: 1px solid rgb(255 255 255 / 18%); border-radius: 10px; color: #fff;
+}
+.icon-btn:hover { background: rgb(255 255 255 / 10%); }
+.notice {
+  background: var(--warn-bg); color: var(--warn); padding: 8px 24px; font-size: 13px; border-bottom: 1px solid var(--line);
+}
+
+/* ---------- layout ---------- */
+main {
+  display: grid; grid-template-columns: 372px minmax(0, 1fr); gap: 24px; align-items: start;
+  max-width: 1280px; margin: 0 auto; padding: 24px;
+}
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+h2 { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- phone ---------- */
+.stage { position: sticky; top: 12px; display: grid; gap: 12px; justify-items: center; }
+.phone {
+  position: relative; width: 288px; height: 540px; padding: 10px; border-radius: 42px;
+  background: linear-gradient(160deg, #2B3550, #0B0F1A 55%); box-shadow: 0 24px 48px rgb(5 10 25 / 35%), inset 0 0 0 1.5px #3A4566;
+}
+.screen {
+  position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 34px; color: #fff;
+  background: radial-gradient(120% 80% at 20% 0%, #26407A 0%, #14213D 55%, #0A1226 100%);
+  isolation: isolate;
+}
+.island { position: absolute; z-index: 3; top: 10px; left: 50%; width: 82px; height: 22px; margin-left: -41px; border-radius: 999px; background: #05070D; }
+.statusbar { position: absolute; z-index: 2; top: 10px; left: 24px; right: 22px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; }
+.statusbar .sys { display: flex; gap: 6px; align-items: center; }
+.home { position: absolute; inset: 0; display: grid; align-content: center; justify-items: center; gap: 6px; padding: 0 24px 40px; text-align: center; }
+.home .clock { font-size: 56px; font-weight: 300; letter-spacing: -.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+.home .date { color: #BAC6E4; font-size: 14px; }
+.home .wait { margin-top: 28px; display: inline-flex; gap: 8px; align-items: center; color: #D5DDF2; font-size: 13px; background: rgb(255 255 255 / 9%); padding: 8px 14px; border-radius: 999px; }
+.home .wait .dot { width: 7px; height: 7px; background: var(--amber); animation: pulse 2s infinite; --c: 252 163 17; box-shadow: 0 0 0 0 rgb(252 163 17 / 60%); }
+.bar { position: absolute; bottom: 8px; left: 50%; width: 110px; margin-left: -55px; height: 4px; border-radius: 4px; background: rgb(255 255 255 / 55%); }
+
+.scrim { position: absolute; inset: 0; z-index: 1; background: rgb(3 6 14 / 62%); display: grid; align-items: center; padding: 48px 12px 16px; }
+.sheet {
+  background: #F6F7FB; color: #14213D; border-radius: 22px; padding: 18px 18px 14px; display: grid; gap: 12px;
+  box-shadow: 0 20px 40px rgb(0 0 0 / 45%); animation: rise .28s cubic-bezier(.2, .8, .2, 1);
+}
+@keyframes rise { from { transform: translateY(18px) scale(.97); opacity: 0; } }
+.sheet-head { display: flex; align-items: center; gap: 10px; }
+.sheet-head .app { font-weight: 700; letter-spacing: .06em; font-size: 12px; color: #146C43; }
+.sheet-head .sub { font-size: 11px; color: #566075; }
+.ring { margin-left: auto; position: relative; width: 38px; height: 38px; flex: none; }
+.ring svg { width: 38px; height: 38px; transform: rotate(-90deg); }
+.ring circle { fill: none; stroke-width: 3.5; }
+.ring .track { stroke: #DCE1EE; }
+.ring .arc { stroke: #146C43; stroke-linecap: round; transition: stroke-dashoffset .9s linear; }
+.ring .arc.low { stroke: #A8231B; }
+.ring b { position: absolute; inset: 0; display: grid; place-items: center; font-size: 11px; font-variant-numeric: tabular-nums; }
+.sheet .ask { font-size: 15px; line-height: 1.35; margin: 0; }
+.sheet .ask strong { font-size: 19px; display: block; margin-bottom: 2px; }
+.sheet .meta { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 12px; color: #566075; margin: 0; }
+.sheet .meta dt { color: #566075; } .sheet .meta dd { margin: 0; color: #14213D; font-weight: 600; overflow-wrap: anywhere; }
+.pin { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 2px 0; }
+.pin i { height: 40px; border-radius: 12px; background: #fff; border: 1.5px solid #C9D0E2; display: grid; place-items: center; }
+.pin i::after { content: ""; width: 11px; height: 11px; border-radius: 50%; background: #14213D; transform: scale(0); transition: transform .12s; }
+.pin i.on::after { transform: scale(1); }
+.pin i.bad { border-color: #A8231B; background: #FBE3E0; }
+.sheet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.sheet-actions button { height: 42px; border-radius: 12px; border: 0; font-weight: 700; }
+.sheet-actions .no { background: #E4E8F2; color: #14213D; }
+.sheet-actions .yes { background: #146C43; color: #fff; }
+.sheet-actions button:disabled { opacity: .55; cursor: default; }
+.queue { position: absolute; z-index: 2; top: 44px; left: 0; right: 0; display: flex; justify-content: center; }
+.queue span { background: rgb(255 255 255 / 16%); color: #fff; font-size: 11px; padding: 3px 10px; border-radius: 999px; }
+.flash { text-align: center; display: grid; gap: 6px; justify-items: center; padding: 8px 2px 4px; animation: rise .28s ease-out; }
+.flash .badge { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; }
+.flash.ok .badge { background: #E2F3E9; color: #146C43; } .flash.fail .badge { background: #FBE3E0; color: #A8231B; }
+.flash b { font-size: 15px; } .flash p { margin: 0; font-size: 12.5px; color: #566075; }
+.flash code { font-family: var(--mono); font-size: 13px; letter-spacing: .04em; color: #14213D; background: #E8ECF6; padding: 2px 8px; border-radius: 6px; }
+
+/* ---------- scenario controls ---------- */
+.controls { width: 288px; display: grid; gap: 10px; }
+.controls h2 { padding-left: 2px; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.seg .wide { grid-column: 1 / -1; }
+.btn {
+  min-height: 40px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface);
+  font-weight: 600; box-shadow: var(--shadow); transition: transform .08s, background .15s;
+}
+.btn:hover:not(:disabled) { background: var(--surface-2); }
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn:disabled { opacity: .5; cursor: default; box-shadow: none; }
+.btn.primary { background: var(--amber); border-color: var(--amber); color: var(--amber-ink); }
+.btn.primary:hover:not(:disabled) { background: #FFB22E; }
+.btn.small { min-height: 30px; padding: 4px 10px; font-size: 12.5px; box-shadow: none; border-radius: 8px; }
+.btn.danger { color: var(--bad); }
+.check { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--muted); padding: 2px; }
+.check input { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--amber); }
+
+/* ---------- right column ---------- */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.stat { padding: 12px 16px; }
+.stat b { display: block; font-size: 24px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 12px; color: var(--muted); }
+.tabs { display: flex; gap: 4px; padding: 6px; margin-bottom: 16px; width: fit-content; max-width: 100%; overflow-x: auto; }
+.tab { border: 0; background: transparent; padding: 8px 14px; border-radius: 8px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.tab[aria-selected="true"] { background: var(--navy); color: #fff; }
+:root[data-theme="dark"] .tab[aria-selected="true"] { background: var(--amber); color: var(--amber-ink); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tab[aria-selected="true"] { background: var(--amber); color: var(--amber-ink); } }
+.pane[hidden] { display: none; }
+.list { display: grid; gap: 12px; }
+.tx { padding: 14px 16px; display: grid; gap: 10px; }
+.tx-head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.kind { font-size: 11px; font-weight: 700; letter-spacing: .06em; padding: 2px 8px; border-radius: 6px; background: var(--info-bg); color: var(--info); }
+.amt { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.badge { font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+.b-ok { background: var(--ok-bg); color: var(--ok); } .b-warn { background: var(--warn-bg); color: var(--warn); }
+.b-bad { background: var(--bad-bg); color: var(--bad); } .b-mute { background: var(--surface-2); color: var(--muted); border: 1px solid var(--line); }
+.tx-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--muted); font-size: 12.5px; }
+.tx-meta b { color: var(--ink); font-weight: 600; }
+.mono { font-family: var(--mono); font-size: 12.5px; }
+.spacer { margin-left: auto; color: var(--muted); font-size: 12px; }
+.dlv { border-top: 1px dashed var(--line); padding-top: 10px; display: grid; gap: 8px; }
+.dlv-row { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 12.5px; }
+.dlv-row .url { color: var(--muted); font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; flex: 1 1 200px; }
+.tries { display: inline-flex; gap: 4px; }
+.tries i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--line); }
+.tries i.f { background: var(--bad); border-color: var(--bad); } .tries i.s { background: var(--ok); border-color: var(--ok); }
+pre.payload {
+  margin: 0; padding: 12px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--line);
+  font: 12px/1.5 var(--mono); overflow: auto; max-height: 260px; white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.withheld { background: var(--warn-bg); color: var(--warn); border-radius: 8px; padding: 8px 12px; font-size: 12.5px; display: flex; gap: 8px 12px; align-items: center; flex-wrap: wrap; }
+.empty { padding: 40px 24px; text-align: center; color: var(--muted); display: grid; gap: 8px; justify-items: center; }
+.empty svg { color: var(--line); }
+.empty b { color: var(--ink); font-size: 15px; }
+.wire { display: grid; }
+.wire-row { border-top: 1px solid var(--line); }
+.wire-row:first-child { border-top: 0; }
+.wire-row > button { width: 100%; text-align: left; display: flex; gap: 12px; align-items: center; padding: 10px 16px; background: transparent; border: 0; }
+.wire-row > button:hover { background: var(--surface-2); }
+.wire-row .verb { font-weight: 700; font-family: var(--mono); font-size: 12px; width: 40px; flex: none; }
+.wire-row .path { font-family: var(--mono); font-size: 12.5px; flex: 1; overflow-wrap: anywhere; }
+.wire-row .detail { padding: 0 16px 14px; display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+.wire-row .detail h3 { margin: 0 0 4px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.panel { padding: 20px; display: grid; gap: 16px; }
+.panel p { margin: 0; color: var(--muted); }
+.field { display: grid; gap: 4px; }
+.field label { font-size: 12.5px; font-weight: 600; }
+.field input {
+  height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); min-width: 0;
+}
+.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.form-msg { font-size: 12.5px; min-height: 18px; color: var(--muted); }
+.form-msg.err { color: var(--bad); }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; align-items: center; }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; }
+.copy { position: relative; }
+.copy pre { padding-right: 84px; }
+.copy .btn { position: absolute; top: 8px; right: 8px; }
+.routes { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.routes li { display: flex; gap: 12px; align-items: baseline; }
+.routes .verb { font-family: var(--mono); font-size: 11.5px; font-weight: 700; width: 38px; flex: none; color: var(--muted); }
+
+@media (max-width: 960px) {
+  main { grid-template-columns: 1fr; padding: 16px; }
+  .stage { position: static; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .wire-row .detail { grid-template-columns: 1fr; }
+  .top { padding: 12px 16px; }
+  .brand span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <svg width="36" height="36" viewBox="0 0 32 32" role="img" aria-label="daraja-php logo">
+      <rect width="32" height="32" rx="8" fill="#FCA311"/>
+      <path d="M5.5 21.5c3-9.5 18-9.5 21 0" fill="none" stroke="#14213D" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M4.5 22.5h23" stroke="#14213D" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M11 22v-5.2M16 22V15M21 22v-5.2" stroke="#14213D" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <div><b>daraja-mock</b> <span>· a stand-in for Safaricom's Daraja API</span></div>
+  </div>
+  <div class="grow"></div>
+  <div class="live" id="live" data-ok="false" role="status"><span class="dot"></span><span id="live-text">Connecting</span></div>
+  <button class="icon-btn" id="theme" type="button" aria-label="Toggle light and dark theme" title="Toggle theme">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+</header>
+<div class="notice">Development stand-in. Every credential, phone number and receipt here is fake, and nothing leaves this machine.</div>
+
+<main>
+  <section class="stage" aria-label="Simulated phone">
+    <div class="phone">
+      <div class="screen" id="screen"></div>
+    </div>
+    <div class="controls">
+      <h2>Customer response</h2>
+      <div class="seg" id="scenario">
+        <button class="btn primary wide" type="button" data-action="accept" disabled>Enter PIN and accept</button>
+        <button class="btn" type="button" data-action="cancel" disabled>Cancel</button>
+        <button class="btn" type="button" data-action="wrong_pin" disabled>Wrong PIN</button>
+        <button class="btn" type="button" data-action="insufficient" disabled>Insufficient funds</button>
+        <button class="btn" type="button" data-action="timeout" disabled>Time out</button>
+      </div>
+      <label class="check"><input type="checkbox" id="lose"><span>Lose the callback. Resolve the payment but do not tell your server, to practise reconciling with STK query.</span></label>
+    </div>
+  </section>
+
+  <section aria-label="Activity">
+    <div class="stats" id="stats"></div>
+    <div class="card tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" id="t-pay" aria-controls="p-pay" aria-selected="true" type="button">Payments</button>
+      <button class="tab" role="tab" id="t-wire" aria-controls="p-wire" aria-selected="false" type="button">Wire log</button>
+      <button class="tab" role="tab" id="t-tools" aria-controls="p-tools" aria-selected="false" type="button">Tools</button>
+      <button class="tab" role="tab" id="t-connect" aria-controls="p-connect" aria-selected="false" type="button">Connect</button>
+    </div>
+    <div class="pane" id="p-pay" role="tabpanel" aria-labelledby="t-pay"><div class="list" id="list"></div></div>
+    <div class="pane" id="p-wire" role="tabpanel" aria-labelledby="t-wire" hidden><div class="card wire" id="wire"></div></div>
+    <div class="pane" id="p-tools" role="tabpanel" aria-labelledby="t-tools" hidden>
+      <div class="list">
+        <form class="card panel" id="f-stk" novalidate>
+          <h2>Send a test STK prompt</h2>
+          <p>Skip your app and put a prompt on the phone. Add a callback URL to see the result delivered.</p>
+          <div class="form-row">
+            <div class="field"><label for="s-amount">Amount (KES)</label><input id="s-amount" inputmode="numeric" value="250"></div>
+            <div class="field"><label for="s-phone">Phone</label><input id="s-phone" value="0700 000 001" autocomplete="off"></div>
+          </div>
+          <div class="field"><label for="s-url">Callback URL (optional)</label><input id="s-url" placeholder="http://127.0.0.1:4151/hooks/stk/..." autocomplete="off"></div>
+          <div><button class="btn primary" type="submit">Send prompt</button></div>
+          <div class="form-msg" id="m-stk" role="status"></div>
+        </form>
+        <form class="card panel" id="f-c2b" novalidate>
+          <h2>Simulate a customer paying your paybill (C2B)</h2>
+          <p>Runs your validation URL (if registered), then delivers the confirmation callback.</p>
+          <div class="form-row">
+            <div class="field"><label for="c-amount">Amount (KES)</label><input id="c-amount" inputmode="numeric" value="500"></div>
+            <div class="field"><label for="c-phone">Phone</label><input id="c-phone" value="0700 000 002" autocomplete="off"></div>
+            <div class="field"><label for="c-ref">Account / bill reference</label><input id="c-ref" value="INV-2026-0042" maxlength="20" autocomplete="off"></div>
+          </div>
+          <div><button class="btn primary" type="submit">Simulate payment</button></div>
+          <div class="form-msg" id="m-c2b" role="status"></div>
+        </form>
+        <div class="card panel">
+          <h2>Reset</h2>
+          <p>Forget every payment, delivery and registered URL.</p>
+          <div><button class="btn danger" id="reset" type="button">Clear all data</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pane" id="p-connect" role="tabpanel" aria-labelledby="t-connect" hidden>
+      <div class="list">
+        <div class="card panel">
+          <h2>Point your app here</h2>
+          <div class="copy"><pre class="payload" id="env"></pre><button class="btn small" id="copy-env" type="button">Copy</button></div>
+          <dl class="kv" id="kv"></dl>
+        </div>
+        <div class="card panel">
+          <h2>Routes implemented</h2>
+          <ul class="routes">
+            <li><span class="verb">GET</span><span class="mono">/oauth/v1/generate?grant_type=client_credentials</span></li>
+            <li><span class="verb">POST</span><span class="mono">/mpesa/stkpush/v1/processrequest</span></li>
+            <li><span class="verb">POST</span><span class="mono">/mpesa/stkpushquery/v1/query</span></li>
+            <li><span class="verb">POST</span><span class="mono">/mpesa/c2b/v1/registerurl, /v2/registerurl</span></li>
+            <li><span class="verb">POST</span><span class="mono">/mpesa/c2b/v1/simulate</span></li>
+            <li><span class="verb">POST</span><span class="mono">/mpesa/b2c/v1/paymentrequest</span></li>
+            <li><span class="verb">POST</span><span class="mono">/mpesa/transactionstatus/v1/query</span></li>
+            <li><span class="verb">POST</span><span class="mono">/mpesa/reversal/v1/request</span></li>
+          </ul>
+          <p>Shapes follow Safaricom's public documentation. They were not recorded from live traffic.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<div class="sr-only" id="announce" aria-live="polite"></div>
+
+<script>
+(() => {
+  'use strict';
+  const $ = (s, r = document) => r.querySelector(s);
+  const el = (tag, attrs = {}, ...kids) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (v === false || v == null) continue;
+      if (k === 'class') n.className = v; else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v === true ? '' : v);
+    }
+    for (const kid of kids.flat()) if (kid != null && kid !== false) n.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+    return n;
+  };
+  const svg = (html, size = 20) => { const t = document.createElement('template'); t.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${html}</svg>`; return t.content.firstChild; };
+  const ICON = {
+    check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>', x: '<path d="M6 6l12 12M18 6L6 18"/>',
+    inbox: '<path d="M3 13h5l1.5 3h5L16 13h5"/><path d="M5 5h14l2 8v6H3v-6z"/>',
+  };
+  const money = (n) => 'KES ' + new Intl.NumberFormat('en-KE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+  const phone = (m) => /^254\d{9}$/.test(m) ? `+254 ${m.slice(3, 6)} ${m.slice(6, 9)} ${m.slice(9)}` : m;
+  const hhmmss = (t) => new Date(t * 1000).toLocaleTimeString('en-GB', { hour12: false });
+
+  const S = { data: null, got: 0, offset: 0, tab: 'pay', open: new Set(), flash: null, busy: false, lastKey: '', seenPrompts: new Set(), ok: false };
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sleep = (ms) => new Promise((r) => setTimeout(r, reduce ? 0 : ms));
+
+  async function api(path, body) {
+    const res = await fetch(path, body === undefined ? {} : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(json.error || `HTTP ${res.status}`);
+    return json;
+  }
+
+  /* ---------- theme ---------- */
+  const root = document.documentElement;
+  try { const t = localStorage.getItem('daraja-theme'); if (t) root.dataset.theme = t; } catch (e) { /* storage blocked */ }
+  $('#theme').addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try { localStorage.setItem('daraja-theme', root.dataset.theme); } catch (e) { /* ignore */ }
+  });
+
+  /* ---------- tabs ---------- */
+  const tabs = ['pay', 'wire', 'tools', 'connect'];
+  function showTab(name) {
+    S.tab = name;
+    for (const t of tabs) { $('#t-' + t).setAttribute('aria-selected', String(t === name)); $('#p-' + t).hidden = t !== name; }
+  }
+  for (const t of tabs) $('#t-' + t).addEventListener('click', () => showTab(t));
+  $('.tabs').addEventListener('keydown', (e) => {
+    const i = tabs.indexOf(S.tab); let n = i;
+    if (e.key === 'ArrowRight') n = (i + 1) % tabs.length; else if (e.key === 'ArrowLeft') n = (i + tabs.length - 1) % tabs.length; else return;
+    showTab(tabs[n]); $('#t-' + tabs[n]).focus(); e.preventDefault();
+  });
+
+  /* ---------- phone ---------- */
+  const statusBar = () => el('div', { class: 'statusbar' },
+    el('span', { id: 'sb-time' }, ''),
+    el('span', { class: 'sys', 'aria-hidden': 'true' },
+      svg('<path d="M2 20h2v-4H2zM8 20h2v-8H8zM14 20h2V8h-2zM20 20h2V4h-2z" fill="currentColor" stroke="none"/>', 14),
+      svg('<rect x="2" y="7" width="17" height="10" rx="2.5"/><path d="M22 10.5v3"/><rect x="4.5" y="9.5" width="10" height="5" rx="1" fill="currentColor" stroke="none"/>', 18)));
+
+  function clockText() {
+    const now = new Date(Date.now() + S.offset * 1000);
+    const tz = { timeZone: 'Africa/Nairobi' };
+    return {
+      time: now.toLocaleTimeString('en-GB', { ...tz, hour: '2-digit', minute: '2-digit', hour12: false }),
+      date: now.toLocaleDateString('en-GB', { ...tz, weekday: 'long', day: 'numeric', month: 'long' }),
+    };
+  }
+
+  function renderPhone() {
+    const screen = $('#screen');
+    const pending = S.data ? S.data.pending : [];
+    const current = pending[0];
+    const kids = [el('div', { class: 'island' }), statusBar()];
+
+    if (!current && !S.flash) {
+      const c = clockText();
+      kids.push(el('div', { class: 'home' },
+        el('div', { class: 'clock', id: 'home-clock' }, c.time), el('div', { class: 'date', id: 'home-date' }, c.date),
+        el('div', { class: 'wait' }, el('span', { class: 'dot' }), 'Waiting for an STK push')));
+    } else {
+      kids.push(el('div', { class: 'home' }, el('div', { class: 'clock', id: 'home-clock' }, clockText().time)));
+      kids.push(el('div', { class: 'scrim' }, S.flash ? flashSheet(S.flash) : promptSheet(current)));
+      if (!S.flash && pending.length > 1) kids.push(el('div', { class: 'queue' }, el('span', {}, `1 of ${pending.length} waiting`)));
+    }
+    kids.push(el('div', { class: 'bar' }));
+    screen.replaceChildren(...kids);
+    tickClock();
+  }
+
+  function promptSheet(t) {
+    const pin = el('div', { class: 'pin', 'aria-hidden': 'true' }, [0, 1, 2, 3].map(() => el('i')));
+    S.pinEl = pin;
+    const no = el('button', { class: 'no', type: 'button', onclick: () => respond(t.id, 'cancel') }, 'Cancel');
+    const yes = el('button', { class: 'yes', type: 'button', onclick: () => respond(t.id, 'accept') }, 'Send');
+    S.phoneBtns = [no, yes];
+    const total = Math.max(1, Math.round(t.expiresAt - t.createdAt));
+    S.ring = { id: t.id, expiresAt: t.expiresAt, total };
+    const r = 16, circ = 2 * Math.PI * r;
+    const label = el('b', {}, '');
+    S.ringEls = { arc: null, label, circ };
+    const ringSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    ringSvg.setAttribute('viewBox', '0 0 38 38');
+    const track = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    for (const [k, v] of Object.entries({ class: 'track', cx: 19, cy: 19, r })) track.setAttribute(k, v);
+    const arcNs = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    for (const [k, v] of Object.entries({ class: 'arc', cx: 19, cy: 19, r, 'stroke-dasharray': circ, 'stroke-dashoffset': 0 })) arcNs.setAttribute(k, v);
+    ringSvg.append(track, arcNs);
+    S.ringEls.arc = arcNs;
+    return el('div', { class: 'sheet', role: 'dialog', 'aria-label': 'M-PESA payment prompt' },
+      el('div', { class: 'sheet-head' },
+        svg('<path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="M9 12l2.2 2.2L15.5 10"/>', 22),
+        el('div', {}, el('div', { class: 'app' }, 'M-PESA'), el('div', { class: 'sub' }, 'Payment request')),
+        el('div', { class: 'ring', 'aria-hidden': 'true' }, ringSvg, label)),
+      el('p', { class: 'ask' }, el('strong', {}, money(t.amount)), `to business ${t.shortCode}`),
+      el('dl', { class: 'meta' },
+        el('dt', {}, 'Account'), el('dd', {}, t.accountReference || '-'),
+        el('dt', {}, 'Note'), el('dd', {}, t.description || '-'),
+        el('dt', {}, 'From'), el('dd', {}, phone(t.msisdn))),
+      el('div', {}, el('div', { class: 'sub', style: 'font-size:12px;color:#566075;margin-bottom:6px' }, 'Enter M-PESA PIN'), pin),
+      el('div', { class: 'sheet-actions' }, no, yes));
+  }
+
+  function flashSheet(f) {
+    const ok = f.kind === 'ok';
+    return el('div', { class: 'sheet', role: 'status' }, el('div', { class: 'flash ' + (ok ? 'ok' : 'fail') },
+      el('div', { class: 'badge' }, svg(ok ? ICON.check : ICON.x, 28)), el('b', {}, f.title), el('p', {}, f.text), f.receipt ? el('code', {}, f.receipt) : null));
+  }
+
+  function tickClock() {
+    const c = clockText();
+    const a = $('#sb-time'); if (a) a.textContent = c.time;
+    const b = $('#home-clock'); if (b) b.textContent = c.time;
+    const d = $('#home-date'); if (d) d.textContent = c.date;
+    if (S.ring && S.ringEls && !S.flash) {
+      const left = Math.max(0, S.ring.expiresAt - (Date.now() / 1000 + S.offset));
+      S.ringEls.arc.setAttribute('stroke-dashoffset', String(S.ringEls.circ * (1 - left / S.ring.total)));
+      S.ringEls.arc.classList.toggle('low', left < 10);
+      S.ringEls.label.textContent = String(Math.ceil(left));
+    }
+  }
+
+  const OUTCOME_TEXT = {
+    accept: null,
+    cancel: ['Request cancelled', 'You cancelled the payment.'],
+    wrong_pin: ['Wrong PIN', 'The PIN you entered was incorrect.'],
+    insufficient: ['Insufficient funds', 'Your M-PESA balance is too low.'],
+    timeout: ['Request timed out', 'The prompt expired before you answered.'],
+  };
+
+  async function respond(id, action) {
+    if (S.busy) return;
+    S.busy = true; setControls(false);
+    const t = S.data.pending.find((p) => p.id === id);
+    try {
+      if (action === 'accept' || action === 'wrong_pin') {
+        const dots = S.pinEl ? [...S.pinEl.children] : [];
+        for (const d of dots) { d.classList.add('on'); await sleep(130); }
+        if (action === 'wrong_pin') dots.forEach((d) => d.classList.add('bad'));
+        await sleep(220);
+      }
+      const res = await api(`/console/api/stk/${id}/respond`, { action, sendCallback: !$('#lose').checked });
+      const tx = res.transaction;
+      const lines = OUTCOME_TEXT[action];
+      S.flash = action === 'accept'
+        ? { kind: 'ok', title: 'Payment sent', text: `${money(t ? t.amount : tx.amount)} paid to ${tx.shortCode}.`, receipt: tx.receipt }
+        : { kind: 'fail', title: lines[0], text: lines[1] };
+      renderPhone();
+      setTimeout(() => { S.flash = null; renderPhone(); setControls(); }, reduce ? 800 : 2600);
+      await refresh();
+    } catch (e) {
+      S.flash = { kind: 'fail', title: 'Not sent', text: e.message };
+      renderPhone();
+      setTimeout(() => { S.flash = null; renderPhone(); }, 2200);
+    } finally { S.busy = false; setControls(); }
+  }
+
+  function setControls(force) {
+    const has = !!(S.data && S.data.pending.length) && !S.flash && !S.busy;
+    for (const b of document.querySelectorAll('#scenario button')) b.disabled = force === false ? true : !has;
+    for (const b of S.phoneBtns || []) b.disabled = !has;
+  }
+  $('#scenario').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-action]');
+    if (b && S.data && S.data.pending[0]) respond(S.data.pending[0].id, b.dataset.action);
+  });
+
+  /* ---------- payments ---------- */
+  const STATUS = {
+    pending: ['Waiting for customer', 'b-warn'], success: ['Paid', 'b-ok'], cancelled: ['Cancelled', 'b-mute'], timeout: ['Timed out', 'b-mute'],
+    insufficient_funds: ['Insufficient funds', 'b-bad'], wrong_pin: ['Wrong PIN', 'b-bad'], rejected: ['Rejected by validation', 'b-bad'], reversed: ['Reversed', 'b-mute'], failed: ['Failed', 'b-bad'],
+  };
+  const KIND = { stk: 'STK', c2b: 'C2B', b2c: 'B2C' };
+
+  function deliveryRow(d) {
+    const left = Math.max(0, d.nextAttemptAt - (Date.now() / 1000 + S.offset));
+    let state;
+    if (d.status === 'delivered') state = el('span', { class: 'badge b-ok' }, `Delivered · HTTP ${d.lastHttpStatus}`);
+    else if (d.status === 'failed') state = el('span', { class: 'badge b-bad' }, 'Gave up');
+    else state = el('span', { class: 'badge b-warn' }, d.attempts === 0 ? 'Sending' : `Retry in ${Math.ceil(left)}s`);
+    const dots = [];
+    for (let i = 1; i <= d.maxAttempts; i++) {
+      const used = i <= d.attempts;
+      const last = i === d.attempts;
+      dots.push(el('i', { class: used ? (last && d.status === 'delivered' ? 's' : 'f') : '' }));
+    }
+    const key = 'd' + d.id;
+    const open = S.open.has(key);
+    return el('div', {},
+      el('div', { class: 'dlv-row' },
+        el('strong', {}, d.label), state,
+        el('span', { class: 'tries', 'aria-label': `${d.attempts} of ${d.maxAttempts} attempts` }, dots),
+        d.lastError && d.status !== 'delivered' ? el('span', { style: 'color:var(--muted)' }, d.lastError) : null,
+        el('span', { class: 'url' }, d.url),
+        el('button', { class: 'btn small', type: 'button', 'aria-expanded': String(open), onclick: () => { toggle(key); } }, open ? 'Hide body' : 'Body'),
+        el('button', { class: 'btn small', type: 'button', onclick: () => act(`/console/api/deliveries/${d.id}/redeliver`, {}) }, d.status === 'delivered' ? 'Redeliver (duplicate)' : 'Retry now')),
+      open ? el('pre', { class: 'payload' }, pretty(d.payload)) : null);
+  }
+
+  function txCard(t) {
+    const [label, cls] = STATUS[t.status] || [t.status, 'b-mute'];
+    const meta = [
+      ['Phone', phone(t.msisdn)], t.accountReference ? ['Account', t.accountReference] : null,
+      t.receipt ? ['Receipt', el('span', { class: 'mono' }, t.receipt)] : null,
+      t.status !== 'pending' && t.status !== 'success' && t.resultCode != null ? ['Code', String(t.resultCode)] : null,
+    ].filter(Boolean).map(([k, v]) => el('span', {}, k + ' ', el('b', {}, v)));
+    const kids = [
+      el('div', { class: 'tx-head' }, el('span', { class: 'kind' }, KIND[t.kind] || t.kind), el('span', { class: 'amt' }, money(t.amount)),
+        el('span', { class: 'badge ' + cls }, label), el('span', { class: 'spacer' }, hhmmss(t.createdAt))),
+      el('div', { class: 'tx-meta' }, meta),
+    ];
+    if (t.resultDesc && t.status !== 'pending') kids.push(el('div', { class: 'tx-meta' }, el('span', {}, t.resultDesc)));
+    if (t.callbackWithheld) {
+      kids.push(el('div', { class: 'withheld' }, 'Callback withheld. Your server has not been told. Query the payment to reconcile.',
+        el('button', { class: 'btn small', type: 'button', onclick: () => act(`/console/api/transactions/${t.id}/send-callback`, {}) }, 'Send callback now')));
+    }
+    if (t.deliveries.length) kids.push(el('div', { class: 'dlv' }, t.deliveries.map(deliveryRow)));
+    return el('article', { class: 'card tx' }, kids);
+  }
+
+  function renderList() {
+    const list = $('#list');
+    const rows = S.data.transactions;
+    if (!rows.length) {
+      list.replaceChildren(el('div', { class: 'card empty' }, svg(ICON.inbox, 40), el('b', {}, 'No payments yet'),
+        el('span', {}, 'Send an STK push from your app, or use Tools to put a test prompt on the phone.')));
+      return;
+    }
+    list.replaceChildren(...rows.map(txCard));
+  }
+
+  function renderStats() {
+    const rows = S.data.transactions;
+    const count = (f) => rows.filter(f).length;
+    const dl = rows.flatMap((r) => r.deliveries);
+    const items = [
+      [S.data.pending.length, 'Waiting for a customer'], [count((r) => r.status === 'success'), 'Paid'],
+      [count((r) => ['cancelled', 'timeout', 'insufficient_funds', 'wrong_pin', 'rejected'].includes(r.status)), 'Not completed'],
+      [`${dl.filter((d) => d.status === 'delivered').length}/${dl.length}`, 'Callbacks delivered'],
+    ];
+    $('#stats').replaceChildren(...items.map(([n, l]) => el('div', { class: 'card stat' }, el('b', {}, n), el('span', {}, l))));
+  }
+
+  function pretty(s) { try { return JSON.stringify(JSON.parse(s), null, 2); } catch (e) { return s; } }
+  function toggle(key) { S.open.has(key) ? S.open.delete(key) : S.open.add(key); renderAll(true); }
+
+  /* ---------- wire log ---------- */
+  function renderWire() {
+    const w = $('#wire');
+    if (!S.data.wire.length) { w.replaceChildren(el('div', { class: 'empty' }, el('b', {}, 'No API calls yet'), el('span', {}, 'Requests your app makes to the mock appear here, newest first.'))); return; }
+    w.replaceChildren(...S.data.wire.map((r) => {
+      const key = 'w' + r.id, open = S.open.has(key);
+      const ok = r.status >= 200 && r.status < 300;
+      return el('div', { class: 'wire-row' },
+        el('button', { type: 'button', 'aria-expanded': String(open), onclick: () => toggle(key) },
+          el('span', { class: 'verb' }, r.method), el('span', { class: 'path' }, r.path),
+          el('span', { class: 'badge ' + (ok ? 'b-ok' : 'b-bad') }, String(r.status)), el('span', { class: 'spacer' }, `${r.ms} ms · ${hhmmss(r.at)}`)),
+        open ? el('div', { class: 'detail' },
+          el('div', {}, el('h3', {}, 'Request'), el('pre', { class: 'payload' }, r.request ? pretty(r.request) : '(none)')),
+          el('div', {}, el('h3', {}, 'Response'), el('pre', { class: 'payload' }, pretty(r.response)))) : null);
+    }));
+  }
+
+  /* ---------- connect ---------- */
+  function renderConnect() {
+    const c = S.data.config;
+    const env = `DARAJA_ENV=sandbox\nDARAJA_BASE_URL=${c.baseUrl}\nDARAJA_CONSUMER_KEY=${c.consumerKey}\nDARAJA_CONSUMER_SECRET=${c.consumerSecret}\nDARAJA_SHORTCODE=${c.shortCode}\nDARAJA_PASSKEY=${c.passKey}`;
+    $('#env').textContent = env;
+    $('#kv').replaceChildren(
+      el('dt', {}, 'Base URL'), el('dd', { class: 'mono' }, c.baseUrl),
+      el('dt', {}, 'STK prompt expires'), el('dd', {}, `${c.stkTimeoutSeconds} seconds, then code 1037`),
+      el('dt', {}, 'Callback retries'), el('dd', {}, c.retryDelays.length ? `${c.retryDelays.length} retries after ${c.retryDelays.join('s, ')}s` : 'none'));
+  }
+  $('#copy-env').addEventListener('click', async (e) => {
+    try { await navigator.clipboard.writeText($('#env').textContent); e.target.textContent = 'Copied'; } catch (err) { e.target.textContent = 'Select and copy'; }
+    setTimeout(() => { e.target.textContent = 'Copy'; }, 1600);
+  });
+
+  /* ---------- forms ---------- */
+  function wireForm(formId, msgId, path, body) {
+    $(formId).addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = $(msgId); msg.className = 'form-msg'; msg.textContent = 'Working...';
+      try { await api(path, body()); msg.textContent = 'Done.'; await refresh(); } catch (err) { msg.className = 'form-msg err'; msg.textContent = err.message; }
+    });
+  }
+  wireForm('#f-stk', '#m-stk', '/console/api/stk/new', () => ({ amount: parseInt($('#s-amount').value, 10) || 0, msisdn: $('#s-phone').value, callbackUrl: $('#s-url').value.trim() }));
+  wireForm('#f-c2b', '#m-c2b', '/console/api/c2b/simulate', () => ({ amount: parseInt($('#c-amount').value, 10) || 0, msisdn: $('#c-phone').value, billRef: $('#c-ref').value.trim() }));
+  $('#reset').addEventListener('click', () => { if (confirm('Delete all mock payments, deliveries and registered URLs?')) act('/console/api/reset', {}); });
+
+  async function act(path, body) { try { await api(path, body); await refresh(); } catch (e) { alert(e.message); } }
+
+  /* ---------- polling ---------- */
+  function renderAll(force) {
+    if (!S.data) return;
+    const key = JSON.stringify([S.data.pending.map((p) => p.id), S.data.transactions, S.data.wire.map((w) => w.id), S.data.config, [...S.open]]);
+    const changed = key !== S.lastKey;
+    S.lastKey = key;
+    if (changed || force) {
+      renderStats(); renderList(); renderWire(); renderConnect();
+    }
+    const topId = S.data.pending[0] ? S.data.pending[0].id : null;
+    if (S.phoneKey !== String(topId) + String(!!S.flash) + S.data.pending.length) {
+      S.phoneKey = String(topId) + String(!!S.flash) + S.data.pending.length;
+      if (!S.busy || !S.flash) renderPhone();
+      for (const p of S.data.pending) if (!S.seenPrompts.has(p.id)) {
+        S.seenPrompts.add(p.id);
+        $('#announce').textContent = `STK prompt for ${money(p.amount)} from ${phone(p.msisdn)}`;
+      }
+    }
+    setControls();
+  }
+
+  async function refresh() {
+    try {
+      const data = await api('/console/api/state');
+      S.data = data; S.offset = data.serverTime - Date.now() / 1000; S.got = Date.now();
+      if (!S.ok) { S.ok = true; $('#live').dataset.ok = 'true'; }
+      $('#live-text').textContent = 'Live · ' + new URL(data.config.baseUrl).host;
+      renderAll();
+    } catch (e) {
+      S.ok = false; $('#live').dataset.ok = 'false'; $('#live-text').textContent = 'Disconnected, retrying';
+    }
+  }
+
+  renderPhoneInitial();
+  function renderPhoneInitial() { S.data = { pending: [], transactions: [], wire: [], config: { baseUrl: location.origin, retryDelays: [], stkTimeoutSeconds: 60 } }; renderPhone(); S.data = null; }
+  refresh();
+  setInterval(refresh, 1000);
+  setInterval(() => { tickClock(); if (S.data && S.tab === 'pay' && S.data.transactions.some((t) => t.deliveries.some((d) => d.status === 'pending'))) renderList(); }, 1000);
+})();
+</script>
+</body>
+</html>

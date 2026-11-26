@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Daraja\Mock;
 
-use Daraja\Callback\C2bTransaction;
 use Daraja\Http\Psr7\Request;
 use Daraja\Http\Psr7\Stream;
 use Daraja\Stk\StkPassword;

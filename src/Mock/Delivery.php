@@ -28,8 +28,8 @@ final readonly class Delivery
     public static function fromRow(array $row): self
     {
         $s = static fn (string $k): string => \is_scalar($row[$k] ?? null) ? (string) $row[$k] : '';
-        $i = static fn (string $k): int => \is_numeric($row[$k] ?? null) ? (int) $row[$k] : 0;
-        $f = static fn (string $k): ?float => \is_numeric($row[$k] ?? null) ? (float) $row[$k] : null;
+        $i = static fn (string $k): int => is_numeric($row[$k] ?? null) ? (int) $row[$k] : 0;
+        $f = static fn (string $k): ?float => is_numeric($row[$k] ?? null) ? (float) $row[$k] : null;
 
         return new self(
             id: $i('id'),
@@ -41,7 +41,7 @@ final readonly class Delivery
             attempts: $i('attempts'),
             maxAttempts: $i('max_attempts'),
             nextAttemptAt: $f('next_attempt_at') ?? 0.0,
-            lastHttpStatus: \is_numeric($row['last_http_status'] ?? null) ? (int) $row['last_http_status'] : null,
+            lastHttpStatus: is_numeric($row['last_http_status'] ?? null) ? (int) $row['last_http_status'] : null,
             lastError: $s('last_error'),
             createdAt: $f('created_at') ?? 0.0,
             deliveredAt: $f('delivered_at'),

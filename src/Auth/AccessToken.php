@@ -8,7 +8,8 @@ namespace Daraja\Auth;
 final readonly class AccessToken
 {
     public function __construct(
-        #[\SensitiveParameter] public string $value,
+        #[\SensitiveParameter]
+        public string $value,
         public int $expiresAt,
     ) {
     }

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soko Fresh checkout (daraja-php example)</title>
+<style>
+:root { color-scheme: light dark; --navy:#14213D; --amber:#FCA311; --bg:#F4F2EC; --surface:#fff; --ink:#14213D; --muted:#566075; --line:#E1DDD1; --ok:#146C43; --ok-bg:#E2F3E9; --bad:#A8231B; --bad-bg:#FBE3E0; --warn:#7A4F00; --warn-bg:#FFF0D0; --focus:#1F5FD6; --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0A1120; --surface:#111A30; --ink:#EDF0F7; --muted:#9DA9C2; --line:#24304D; --ok:#67D49B; --ok-bg:#12352A; --bad:#FF8E86; --bad-bg:#3F1714; --warn:#FFC95C; --warn-bg:#3A2A07; --focus:#7FA8FF; } }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 var(--sans); }
+:focus-visible { outline:3px solid var(--focus); outline-offset:2px; }
+header { background:var(--navy); color:#fff; padding:16px 24px; display:flex; align-items:center; gap:12px; }
+header b { font-size:18px; } header span { color:#B8C2DA; font-size:14px; }
+main { max-width:960px; margin:0 auto; padding:24px 16px 48px; display:grid; gap:24px; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); align-items:start; }
+@media (max-width:760px) { main { grid-template-columns:1fr; } }
+.card { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px; box-shadow:0 1px 2px rgb(20 33 61 / 8%), 0 8px 24px rgb(20 33 61 / 6%); }
+h1 { font-size:20px; margin:0 0 4px; } h2 { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 12px; }
+p.sub { margin:0 0 16px; color:var(--muted); font-size:14px; }
+fieldset { border:0; padding:0; margin:0 0 20px; display:grid; gap:8px; }
+.item { display:flex; align-items:center; gap:12px; padding:12px 14px; border:1.5px solid var(--line); border-radius:12px; cursor:pointer; }
+.item:has(input:checked) { border-color:var(--amber); background:color-mix(in srgb, var(--amber) 12%, var(--surface)); }
+.item input { accent-color:var(--navy); width:18px; height:18px; }
+.item .n { flex:1; font-weight:600; } .item .p { font-variant-numeric:tabular-nums; font-weight:700; }
+label.l { font-weight:600; font-size:14px; display:block; margin-bottom:6px; }
+input[type=tel] { width:100%; height:46px; padding:0 14px; border-radius:12px; border:1.5px solid var(--line); background:transparent; color:inherit; font:inherit; }
+.hint { color:var(--muted); font-size:13px; margin:6px 0 16px; }
+button.pay { width:100%; height:48px; border:0; border-radius:12px; background:var(--amber); color:var(--navy); font:inherit; font-weight:700; cursor:pointer; }
+button.pay:disabled { opacity:.55; cursor:default; }
+button.ghost { height:40px; padding:0 14px; border-radius:10px; border:1.5px solid var(--line); background:transparent; color:inherit; font:inherit; font-weight:600; cursor:pointer; }
+.status { display:grid; gap:12px; min-height:220px; align-content:start; }
+.status .big { font-size:18px; font-weight:700; margin:0; }
+.pill { display:inline-block; justify-self:start; font-size:13px; font-weight:700; padding:3px 12px; border-radius:999px; }
+.pill.wait { background:var(--warn-bg); color:var(--warn); } .pill.ok { background:var(--ok-bg); color:var(--ok); } .pill.bad { background:var(--bad-bg); color:var(--bad); }
+.receipt { font-family:ui-monospace,Menlo,Consolas,monospace; letter-spacing:.05em; background:var(--bg); padding:2px 8px; border-radius:6px; }
+.spin { width:18px; height:18px; border-radius:50%; border:3px solid var(--line); border-top-color:var(--amber); animation:r 1s linear infinite; display:inline-block; vertical-align:-3px; margin-right:8px; }
+@keyframes r { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation:none; } }
+.err { color:var(--bad); font-size:14px; min-height:20px; margin-top:10px; }
+.note { font-size:13px; color:var(--muted); border-top:1px dashed var(--line); padding-top:12px; }
+</style>
+</head>
+<body>
+<header><b>Soko Fresh</b><span>checkout · daraja-php example (sample shop, fake data)</span></header>
+<main>
+  <form class="card" id="form" novalidate>
+    <h1>Pay with M-Pesa</h1>
+    <p class="sub">Pick an item and enter your number. A payment prompt will appear on your phone.</p>
+    <fieldset>
+      <legend class="sr-only" style="position:absolute;left:-9999px">Item</legend>
+      <label class="item"><input type="radio" name="item" value="maize-flour" checked><span class="n">Maize flour 2 kg</span><span class="p">KES 180</span></label>
+      <label class="item"><input type="radio" name="item" value="cooking-oil"><span class="n">Cooking oil 1 L</span><span class="p">KES 320</span></label>
+      <label class="item"><input type="radio" name="item" value="rice"><span class="n">Pishori rice 5 kg</span><span class="p">KES 950</span></label>
+    </fieldset>
+    <label class="l" for="phone">M-Pesa number</label>
+    <input id="phone" type="tel" inputmode="tel" autocomplete="tel" value="0700 000 001" placeholder="0700 000 000">
+    <p class="hint">Accepts 07xx, 01xx, +254 or 254 formats.</p>
+    <button class="pay" id="go" type="submit">Pay now</button>
+    <div class="err" id="err" role="alert"></div>
+  </form>
+  <section class="card status" aria-live="polite" id="status">
+    <h2>Payment status</h2>
+    <p class="sub" style="margin:0">Nothing started yet.</p>
+  </section>
+</main>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const el = (t, a = {}, ...k) => { const n = document.createElement(t); for (const [x, y] of Object.entries(a)) { if (x === 'class') n.className = y; else if (x.startsWith('on')) n.addEventListener(x.slice(2), y); else n.setAttribute(x, y); } n.append(...k.filter((v) => v != null)); return n; };
+  let timer = null, startedAt = 0, ref = null;
+  const LABEL = {
+    cancelled: 'You cancelled the payment.', timed_out: 'The prompt timed out before it was answered.',
+    insufficient_funds: 'Your M-Pesa balance is too low.', wrong_pin: 'The PIN was wrong.', failed: 'The payment did not go through.',
+  };
+  function render(o) {
+    const box = $('#status'); const rows = [el('h2', {}, 'Payment status')];
+    rows.push(el('p', { class: 'sub', style: 'margin:0' }, `${o.item} · KES ${o.amountKes} · `, el('b', {}, o.ref)));
+    if (o.status === 'pending') {
+      rows.push(el('p', { class: 'big' }, el('span', { class: 'spin' }), 'Check your phone'), el('span', { class: 'pill wait' }, 'Waiting for your PIN'));
+      if (Date.now() - startedAt > 8000) rows.push(el('div', {}, el('p', { class: 'note' }, 'Taking long? If you already paid, ask the shop to check with M-Pesa.'), el('button', { class: 'ghost', type: 'button', onclick: reconcile }, 'Check payment status')));
+    } else if (o.status === 'paid') {
+      rows.push(el('p', { class: 'big' }, 'Payment received. Thank you.'), el('span', { class: 'pill ok' }, 'Paid'),
+        o.receipt ? el('p', {}, 'M-Pesa receipt ', el('span', { class: 'receipt' }, o.receipt)) : el('p', { class: 'note' }, 'Confirmed by status query. The receipt number will follow.'));
+    } else {
+      rows.push(el('p', { class: 'big' }, LABEL[o.status] || LABEL.failed), el('span', { class: 'pill bad' }, o.status.replace(/_/g, ' ')),
+        el('div', {}, el('button', { class: 'ghost', type: 'button', onclick: () => { $('#go').disabled = false; $('#phone').focus(); } }, 'Try again')));
+    }
+    box.replaceChildren(...rows);
+    if (o.status !== 'pending') { clearInterval(timer); timer = null; $('#go').disabled = false; }
+  }
+  async function poll() { const r = await fetch('/api/orders/' + ref); if (r.ok) render((await r.json()).order); }
+  async function reconcile() { const r = await fetch(`/api/orders/${ref}/reconcile`, { method: 'POST' }); if (r.ok) render((await r.json()).order); }
+  $('#form').addEventListener('submit', async (e) => {
+    e.preventDefault(); $('#err').textContent = ''; $('#go').disabled = true;
+    try {
+      const res = await fetch('/api/pay', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ item: document.querySelector('input[name=item]:checked').value, phone: $('#phone').value }) });
+      const data = await res.json();
+      if (!res.ok) { $('#err').textContent = data.error || 'Something went wrong.'; $('#go').disabled = false; return; }
+      ref = data.order.ref; startedAt = Date.now(); render(data.order);
+      clearInterval(timer); timer = setInterval(poll, 1500);
+    } catch (err) { $('#err').textContent = 'Network error. Try again.'; $('#go').disabled = false; }
+  });
+})();
+</script>
+</body>
+</html>

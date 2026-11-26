@@ -27,16 +27,20 @@ final readonly class DarajaConfig
      * @param int         $transactionDescMaxLength   STK TransactionDesc limit. 13 per the docs when this was written; configurable for the same reason.
      */
     public function __construct(
-        #[\SensitiveParameter] public string $consumerKey,
-        #[\SensitiveParameter] public string $consumerSecret,
+        #[\SensitiveParameter]
+        public string $consumerKey,
+        #[\SensitiveParameter]
+        public string $consumerSecret,
         public string $shortCode,
-        #[\SensitiveParameter] public string $passKey = '',
+        #[\SensitiveParameter]
+        public string $passKey = '',
         public Environment $environment = Environment::Sandbox,
         ?string $baseUrl = null,
         public int $timeoutSeconds = 30,
         public int $tokenSafetyMarginSeconds = 60,
         public ?string $initiatorName = null,
-        #[\SensitiveParameter] public ?string $securityCredential = null,
+        #[\SensitiveParameter]
+        public ?string $securityCredential = null,
         public int $accountReferenceMaxLength = 12,
         public int $transactionDescMaxLength = 13,
     ) {

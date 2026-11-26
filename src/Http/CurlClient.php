@@ -8,7 +8,6 @@ use Daraja\Exception\ConfigurationException;
 use Daraja\Http\Psr7\Response;
 use Daraja\Http\Psr7\Stream;
 use Psr\Http\Client\ClientInterface;
-use Psr\Http\Client\NetworkExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

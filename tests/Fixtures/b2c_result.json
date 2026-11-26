@@ -1,0 +1,18 @@
+{
+  "Result": {
+    "ResultType": 0,
+    "ResultCode": 0,
+    "ResultDesc": "The service request is processed successfully.",
+    "OriginatorConversationID": "10571-7910404-1",
+    "ConversationID": "AG_20191219_00004e48cf7e3533f581",
+    "TransactionID": "NLJ41HAY6Q",
+    "ResultParameters": {
+      "ResultParameter": [
+        {"Key": "TransactionAmount", "Value": 10},
+        {"Key": "TransactionReceipt", "Value": "NLJ41HAY6Q"},
+        {"Key": "ReceiverPartyPublicName", "Value": "254700000001 - Test Customer"},
+        {"Key": "TransactionCompletedDateTime", "Value": "19.12.2019 11:45:50"}
+      ]
+    }
+  }
+}

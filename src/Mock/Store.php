@@ -157,7 +157,7 @@ final class Store
             }
             $sets[] = $column . ' = ?';
         }
-        $statement = $this->pdo->prepare("UPDATE transactions SET " . implode(', ', $sets) . " WHERE id = ? AND status = 'pending'");
+        $statement = $this->pdo->prepare('UPDATE transactions SET ' . implode(', ', $sets) . " WHERE id = ? AND status = 'pending'");
         $statement->execute([...array_values($fields), $id]);
 
         return $statement->rowCount() === 1;
