@@ -1,0 +1,177 @@
+{
+  "_about": "Inputs only. demo/tools/golden.php feeds them to the real PHP library and writes golden.json; the JavaScript port must give the same answers. Vectors are taken from tests/Unit (MsisdnTest, MoneyTest, StkPasswordTest, StkPushRequestTest, CallbackParserTest, CallbackProcessorTest, StkServiceTest, MockAppTest) plus a few extra edge cases.",
+
+  "msisdn": [
+    "0700000001", "0110000001", "+254700000001", "+254110000001", "254700000001", "254110000001",
+    "0700 000 001", "+254-700-000-001", "  0700000001\n", "\t0700000001\r\n", "0700000001 ", " 0700000001",
+    "", " ", "07000000ab", "070000001", "07000000011", "0201234567", "700000001", "+255700000001", "+0700000001",
+    "00254700000001", "2540700000001", "254200000001", "0700000001'; DROP", "+254", "+", "0", "254",
+    "0700\n000001", "0712 345 678", "0100 000 000", "+254 7 0000 0001"
+  ],
+
+  "money": [
+    10, 1.0, 10.5, 19.99, "10", "10.00", "10.5", "0.07", 0, "0", "0.00", 1.0e9, 1.0e12, 150, 1500.25, 0.005, 0.015,
+    "ten", "1.234", "1,000", "-5", "", " 12 ", "12.", ".5", "1e3", "123456789012", "1234567890123", "99.99"
+  ],
+
+  "timestamps": [
+    "2026-01-15T09:30:45Z", "2026-01-15T22:30:00Z", "2026-12-31T21:00:00Z", "2026-12-31T20:59:59Z",
+    "2026-02-28T21:30:00Z", "2024-02-29T10:00:00Z", "2026-06-01T00:00:00Z"
+  ],
+
+  "passwords": [
+    { "shortCode": "174379", "passKey": "passkey", "timestamp": "20260115123045" },
+    { "shortCode": "174379", "passKey": "mock-passkey-not-a-real-secret", "timestamp": "20260116013000" },
+    { "shortCode": "600638", "passKey": "", "timestamp": "20260101000000" }
+  ],
+
+  "eatParse": [
+    "20191219102115", "20260115123045", "20191399102115", "20190230000000", "20240229120000", "20260115246000",
+    "20260115126000", "20260115120060", "2026011512304", "202601151230455", "2026-01-15", "abc", ""
+  ],
+
+  "urls": [
+    "https://shop.example/cb", "http://127.0.0.1:4151/cb", "https://shop.example/hooks/stk/9f3a1c", "http://localhost/cb",
+    "https://shop.example", "https://shop.example:8443/x?y=1#z", "https://user:pw@shop.example/cb",
+    "https://sub-domain.shop.example/cb", "https://[::1]/cb", "https://shop_underscore.example/cb",
+    "https://-bad.example/cb", "https://shop..example/cb", "https://shop.example/a b", "https://shop.example/ünï",
+    "HTTPS://SHOP.EXAMPLE/CB", "https://", "https:///cb", "https://shop.example:99999/cb", "https://shop.example:abc/cb",
+    "ftp://shop.example/cb", "javascript:alert(1)", "", "shop.example/cb", "http://a", "https://localhost:4151/cb",
+    "https://1.2.3.4/cb", "https://999.1.1.1/cb", "https://shop.example./cb", "https://exa mple.com", "https://shop.example/cb?a=1&b=2",
+    "http://shop.example/cb", "https://shop.example/%20ok", "https://shop.example/<x>", "https://a-.example/cb", "https://shop.example/\"q\""
+  ],
+
+  "stkRequests": [
+    { "name": "valid paybill", "amount": 150, "phone": "0700 000 001", "callbackUrl": "https://shop.example/hooks/stk", "accountReference": "ORD-1", "transactionDesc": "Shop order" },
+    { "name": "valid till", "amount": 150, "phone": "0700000001", "callbackUrl": "https://shop.example/cb", "accountReference": "ORD-1", "transactionDesc": "Shop order", "type": "BuyGoods", "partyB": "5123456" },
+    { "name": "plus 254 phone", "amount": 1, "phone": "+254-110-000-001", "callbackUrl": "http://127.0.0.1:4151/cb", "accountReference": "A", "transactionDesc": "B" },
+    { "name": "amount zero", "amount": 0, "phone": "0700000001", "callbackUrl": "https://shop.example/cb", "accountReference": "ORD-1", "transactionDesc": "Shop order" },
+    { "name": "amount negative", "amount": -5, "phone": "0700000001", "callbackUrl": "https://shop.example/cb", "accountReference": "ORD-1", "transactionDesc": "Shop order" },
+    { "name": "bad phone", "amount": 100, "phone": "12345", "callbackUrl": "https://shop.example/cb", "accountReference": "ORD-1", "transactionDesc": "Shop order" },
+    { "name": "bad url no scheme", "amount": 100, "phone": "0700000001", "callbackUrl": "shop.example/cb", "accountReference": "ORD-1", "transactionDesc": "Shop order" },
+    { "name": "bad url javascript", "amount": 100, "phone": "0700000001", "callbackUrl": "javascript:alert(1)", "accountReference": "ORD-1", "transactionDesc": "Shop order" },
+    { "name": "empty reference", "amount": 100, "phone": "0700000001", "callbackUrl": "https://shop.example/cb", "accountReference": "", "transactionDesc": "Shop order" },
+    { "name": "blank description", "amount": 100, "phone": "0700000001", "callbackUrl": "https://shop.example/cb", "accountReference": "ORD-1", "transactionDesc": "   " },
+    { "name": "till without valid partyB", "amount": 100, "phone": "0700000001", "callbackUrl": "https://shop.example/cb", "accountReference": "A", "transactionDesc": "B", "type": "BuyGoods", "partyB": "abc" },
+    { "name": "reference too long", "amount": 150, "phone": "0700000001", "callbackUrl": "https://shop.example/cb", "accountReference": "THIS-REFERENCE-IS-TOO-LONG", "transactionDesc": "Order" },
+    { "name": "description too long", "amount": 150, "phone": "0700000001", "callbackUrl": "https://shop.example/cb", "accountReference": "ORD-1", "transactionDesc": "A description that is long" },
+    { "name": "reference at the limit", "amount": 150, "phone": "0700000001", "callbackUrl": "https://shop.example/cb", "accountReference": "ABCDEFGHIJKL", "transactionDesc": "ABCDEFGHIJKLM" },
+    { "name": "reference with multibyte characters", "amount": 150, "phone": "0700000001", "callbackUrl": "https://shop.example/cb", "accountReference": "Maziwa ééééé", "transactionDesc": "Order" },
+    { "name": "first error wins: phone before url", "amount": 100, "phone": "x", "callbackUrl": "nope", "accountReference": "", "transactionDesc": "" }
+  ],
+
+  "callbacks": [
+    { "name": "success fixture", "fixture": "stk_callback_success" },
+    { "name": "cancelled fixture", "fixture": "stk_callback_cancelled" },
+    { "name": "code 1", "fixture": "stk_callback_cancelled", "replace": [["\"ResultCode\": 1032", "\"ResultCode\": 1"]] },
+    { "name": "code 1037", "fixture": "stk_callback_cancelled", "replace": [["\"ResultCode\": 1032", "\"ResultCode\": 1037"]] },
+    { "name": "code 2001", "fixture": "stk_callback_cancelled", "replace": [["\"ResultCode\": 1032", "\"ResultCode\": 2001"]] },
+    { "name": "code 1019", "fixture": "stk_callback_cancelled", "replace": [["\"ResultCode\": 1032", "\"ResultCode\": 1019"]] },
+    { "name": "unlisted code 4242", "fixture": "stk_callback_cancelled", "replace": [["\"ResultCode\": 1032", "\"ResultCode\": 4242"]] },
+    { "name": "result code as string", "fixture": "stk_callback_cancelled", "replace": [["\"ResultCode\": 1032", "\"ResultCode\": \"1032\""]] },
+    { "name": "amount with cents", "fixture": "stk_callback_success", "replace": [["\"Value\": 1.00", "\"Value\": 10.5"]] },
+    { "name": "amount as string", "fixture": "stk_callback_success", "replace": [["\"Value\": 1.00", "\"Value\": \"12.50\""]] },
+    { "name": "amount as bad string", "fixture": "stk_callback_success", "replace": [["\"Value\": 1.00", "\"Value\": \"1.234\""]] },
+    { "name": "no receipt", "fixture": "stk_callback_success", "replace": [["\"Name\": \"MpesaReceiptNumber\", \"Value\": \"NLJ7RT61SV\"", "\"Name\": \"Other\", \"Value\": \"x\""]] },
+    { "name": "receipt with spaces", "fixture": "stk_callback_success", "replace": [["\"Value\": \"NLJ7RT61SV\"", "\"Value\": \"NLJ 7RT\""]] },
+    { "name": "receipt too short", "fixture": "stk_callback_success", "replace": [["\"Value\": \"NLJ7RT61SV\"", "\"Value\": \"NLJ7R\""]] },
+    { "name": "no amount", "fixture": "stk_callback_success", "replace": [["\"Name\": \"Amount\", \"Value\": 1.00", "\"Name\": \"Other\", \"Value\": 1"]] },
+    { "name": "zero amount", "fixture": "stk_callback_success", "replace": [["\"Value\": 1.00", "\"Value\": 0"]] },
+    { "name": "boolean amount", "fixture": "stk_callback_success", "replace": [["\"Value\": 1.00", "\"Value\": true"]] },
+    { "name": "no date", "fixture": "stk_callback_success", "replace": [["\"Name\": \"TransactionDate\", \"Value\": 20191219102115", "\"Name\": \"Other\", \"Value\": 1"]] },
+    { "name": "impossible date", "fixture": "stk_callback_success", "replace": [["20191219102115", "20191399102115"]] },
+    { "name": "date as string", "fixture": "stk_callback_success", "replace": [["\"Value\": 20191219102115", "\"Value\": \"20191219102115\""]] },
+    { "name": "phone as string", "fixture": "stk_callback_success", "replace": [["\"Value\": 254700000001", "\"Value\": \"0700000001\""]] },
+    { "name": "phone unparseable", "fixture": "stk_callback_success", "replace": [["\"Value\": 254700000001", "\"Value\": 12345"]] },
+    { "name": "no phone item", "fixture": "stk_callback_success", "replace": [["{\"Name\": \"PhoneNumber\", \"Value\": 254700000001}", "{\"Name\": \"Other\", \"Value\": 1}"]] },
+    { "name": "empty body", "raw": "" },
+    { "name": "not json", "raw": "not json" },
+    { "name": "json list", "raw": "[1,2,3]" },
+    { "name": "json scalar", "raw": "\"hello\"" },
+    { "name": "json null", "raw": "null" },
+    { "name": "missing Body", "raw": "{\"stkCallback\":{}}" },
+    { "name": "missing stkCallback", "raw": "{\"Body\":{}}" },
+    { "name": "Body is a list", "raw": "{\"Body\":[1]}" },
+    { "name": "missing checkout id", "raw": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"1\",\"ResultCode\":1032,\"ResultDesc\":\"x\"}}}" },
+    { "name": "missing result code", "raw": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"1\",\"CheckoutRequestID\":\"2\",\"ResultDesc\":\"x\"}}}" },
+    { "name": "non numeric result code", "raw": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"1\",\"CheckoutRequestID\":\"2\",\"ResultCode\":\"ok\",\"ResultDesc\":\"x\"}}}" },
+    { "name": "success without metadata", "raw": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"1\",\"CheckoutRequestID\":\"2\",\"ResultCode\":0,\"ResultDesc\":\"x\"}}}" },
+    { "name": "numeric ids are stringified", "raw": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":1,\"CheckoutRequestID\":2,\"ResultCode\":1032,\"ResultDesc\":\"x\"}}}" },
+    { "name": "result desc missing is empty", "raw": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"1\",\"CheckoutRequestID\":\"2\",\"ResultCode\":1032}}}" },
+    { "name": "result desc is a list", "raw": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"1\",\"CheckoutRequestID\":\"2\",\"ResultCode\":1032,\"ResultDesc\":[1]}}}" },
+    { "name": "metadata item is not an object", "raw": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"1\",\"CheckoutRequestID\":\"2\",\"ResultCode\":1032,\"ResultDesc\":\"x\",\"CallbackMetadata\":{\"Item\":[1]}}}}" },
+    { "name": "metadata Item is not a list", "raw": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"1\",\"CheckoutRequestID\":\"2\",\"ResultCode\":1032,\"ResultDesc\":\"x\",\"CallbackMetadata\":{\"Item\":{\"a\":1}}}}}" },
+    { "name": "item value is an object", "raw": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"1\",\"CheckoutRequestID\":\"2\",\"ResultCode\":1032,\"ResultDesc\":\"x\",\"CallbackMetadata\":{\"Item\":[{\"Name\":\"A\",\"Value\":{\"b\":1}}]}}}}" },
+    { "name": "oversized", "oversized": true },
+    { "name": "too deep", "raw": "{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":{\"a\":1}}}}}}}}}}}}}}}}}" }
+  ],
+
+  "processor": [
+    {
+      "name": "six deliveries credit once",
+      "steps": [
+        { "fixture": "stk_callback_success" }, { "fixture": "stk_callback_success" }, { "fixture": "stk_callback_success" },
+        { "fixture": "stk_callback_success" }, { "fixture": "stk_callback_success" }, { "fixture": "stk_callback_success" }
+      ]
+    },
+    {
+      "name": "a failing handler releases the key",
+      "steps": [
+        { "fixture": "stk_callback_success", "handlerThrows": true },
+        { "fixture": "stk_callback_success" },
+        { "fixture": "stk_callback_success" }
+      ]
+    },
+    {
+      "name": "re-entrant delivery is in progress",
+      "steps": [ { "fixture": "stk_callback_success", "reenter": true }, { "fixture": "stk_callback_success" } ]
+    },
+    {
+      "name": "malformed payload claims no key",
+      "steps": [ { "raw": "{\"Body\":{}}" }, { "fixture": "stk_callback_success" } ]
+    },
+    {
+      "name": "amount mismatch is rejected before a key is claimed",
+      "steps": [
+        { "fixture": "stk_callback_success", "expected": { "kes": 1500 } },
+        { "fixture": "stk_callback_success", "expected": { "kes": 1 } },
+        { "fixture": "stk_callback_success", "expected": { "kes": 1 } }
+      ]
+    },
+    {
+      "name": "phone mismatch",
+      "steps": [ { "fixture": "stk_callback_success", "expected": { "kes": 1, "phone": "0700000002" } }, { "fixture": "stk_callback_success", "expected": { "kes": 1, "phone": "0700000001" } } ]
+    },
+    {
+      "name": "unknown checkout request is rejected",
+      "steps": [ { "fixture": "stk_callback_success", "expected": "unknown" }, { "fixture": "stk_callback_success", "expected": { "kes": 1, "phone": "0700000001" } } ]
+    },
+    {
+      "name": "failed callbacks are processed and skip the amount check",
+      "steps": [ { "fixture": "stk_callback_cancelled", "expected": { "kes": 1500 } }, { "fixture": "stk_callback_cancelled", "expected": { "kes": 1500 } } ]
+    },
+    {
+      "name": "a late cancel after a success is a duplicate",
+      "steps": [ { "fixture": "stk_callback_success" }, { "fixture": "stk_callback_cancelled" } ]
+    },
+    {
+      "name": "success after a cancel is a duplicate too",
+      "steps": [ { "fixture": "stk_callback_cancelled" }, { "fixture": "stk_callback_success" } ]
+    }
+  ],
+
+  "wire": [
+    { "name": "paybill, normalised phone", "amount": 150, "phone": "0700 000 001", "callbackUrl": "https://shop.example/hooks/stk/9f3a1c", "accountReference": "ORD-1042", "transactionDesc": "Shop order" },
+    { "name": "till", "amount": 320, "phone": "+254110000001", "callbackUrl": "http://127.0.0.1:4151/hooks/stk", "accountReference": "TILL-7", "transactionDesc": "Cooking oil", "type": "BuyGoods", "partyB": "5123456" },
+    { "name": "one shilling", "amount": 1, "phone": "254700000001", "callbackUrl": "https://shop.example/cb", "accountReference": "A", "transactionDesc": "B" }
+  ],
+
+  "wireActions": ["accept", "cancel", "insufficient", "wrong_pin", "timeout", "lost"],
+
+  "mockBadFields": [
+    ["Amount", 0], ["Amount", "lots"], ["Amount", "12"], ["Amount", 12.5], ["PhoneNumber", 712345], ["PhoneNumber", "0700000001"], ["PhoneNumber", 254700000001],
+    ["PartyA", 712345], ["PartyB", "abc"], ["PartyB", 1234567], ["TransactionType", "Teleport"], ["TransactionType", "CustomerBuyGoodsOnline"],
+    ["BusinessShortCode", 999999], ["Password", "bm9wZQ=="], ["Timestamp", "now"], ["Timestamp", "20260115"], ["CallBackURL", "javascript:alert(1)"],
+    ["CallBackURL", "https://shop.example/cb"], ["AccountReference", ""], ["TransactionDesc", ""]
+  ]
+}

@@ -9,6 +9,8 @@
 ![PHP 8.3+](https://img.shields.io/badge/PHP-8.3%2B-777BB4)
 ![PHPStan max](https://img.shields.io/badge/PHPStan-level%20max-brightgreen)
 
+**[Live demo: try an STK push in your browser](https://victor-wambua.github.io/daraja-php/)**
+
 ![The mock Daraja console: a simulated phone showing an STK PIN prompt, next to payments and callback delivery status](docs/screenshots/console-hero.png)
 
 </div>
@@ -43,6 +45,23 @@ You also cannot test any of it without sandbox credentials and a public HTTPS UR
 <p align="center">
   <img src="docs/screenshots/console-pin-entry.png" width="49%" alt="The simulated phone mid-PIN entry">
   <img src="docs/screenshots/example-shop-paid.png" width="49%" alt="The example checkout showing a paid order with its M-Pesa receipt">
+</p>
+
+## Live demo
+
+[victor-wambua.github.io/daraja-php](https://victor-wambua.github.io/daraja-php/) is an interactive explainer: fill in an STK push, pick how the mock
+answers (accept, cancel, no funds, timeout, callback twice, out of order, lost), and read the exact HTTP the client builds and what `CallbackProcessor` does.
+
+- **The PHP library is not running in the page.** The demo is a JavaScript port of the pure parts (validation, request building, password and
+  timestamp, token cache, strict callback parser, idempotency store, cross-check) and of the mock's OAuth, STK and callback behaviour. Nothing is sent anywhere.
+- **The port is tested against the real code.** `demo/tools/golden.php` runs inputs through the real library, including the real client against the
+  real mock in process, and `demo/test/golden.json` holds the answers. CI fails if the port or the PHP code drifts. The PHP snippets on the page are cut verbatim from `examples/`, and CI re-cuts them.
+- **Not ported:** C2B, B2C, Transaction Status, Reversal, the IP allow-list, the SQLite store and the mock's own console. Three scenarios (callback overtakes your app, stale cancel, changed amount) are injected by the demo; the mock cannot produce them.
+- Develop it with `cd demo && npm test`, `npm run smoke` (Playwright), `npm run golden` and `npm run snippets`. There is no build step.
+
+<p align="center">
+  <img src="docs/screenshots/demo-playground.png" width="49%" alt="The playground: the seed request has run and the order is paid">
+  <img src="docs/screenshots/demo-callback-pipeline.png" width="49%" alt="A callback rejected because the app has not stored the request id yet, with each processing stage listed">
 </p>
 
 ## Quick start
@@ -195,6 +214,12 @@ Portfolio build, runs locally with synthetic data. Honest limits:
 
 Next: a transactional idempotency mode (claim and ledger write in one DB transaction), a Laravel package that is
 actually run in CI, dynamic QR and Tanda-style APIs, and recording real sandbox traffic into fixtures.
+
+## Design notes for the demo
+
+System fonts only, one accent colour, hairline rules, real tables and `pre` blocks for HTTP. Light and dark follow the system setting. Every control has a label,
+errors appear beside the field in the library's own words, focus rings stay visible, targets are at least 44 px, and the page needs no horizontal scroll from 320 px.
+After one visit it works offline through a small service worker.
 
 ## Contributing and licence
 

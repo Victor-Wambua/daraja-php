@@ -1,0 +1,17 @@
+{
+  "name": "daraja-php-demo",
+  "private": true,
+  "type": "module",
+  "description": "Static playground for daraja-php. No build step: the page is plain ES modules.",
+  "scripts": {
+    "test": "node --test test/port.test.mjs test/engine.test.mjs",
+    "smoke": "node test/smoke.mjs",
+    "golden": "php tools/golden.php",
+    "golden:check": "php tools/golden.php --check",
+    "snippets": "node tools/snippets.mjs",
+    "snippets:check": "node tools/snippets.mjs --check"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

@@ -1,0 +1,4426 @@
+{
+    "_about": "Written by demo/tools/golden.php from the real PHP code. Do not edit by hand.",
+    "msisdn": [
+        {
+            "input": "0700000001",
+            "result": "254700000001"
+        },
+        {
+            "input": "0110000001",
+            "result": "254110000001"
+        },
+        {
+            "input": "+254700000001",
+            "result": "254700000001"
+        },
+        {
+            "input": "+254110000001",
+            "result": "254110000001"
+        },
+        {
+            "input": "254700000001",
+            "result": "254700000001"
+        },
+        {
+            "input": "254110000001",
+            "result": "254110000001"
+        },
+        {
+            "input": "0700 000 001",
+            "result": "254700000001"
+        },
+        {
+            "input": "+254-700-000-001",
+            "result": "254700000001"
+        },
+        {
+            "input": "  0700000001\n",
+            "result": "254700000001"
+        },
+        {
+            "input": "\t0700000001\r\n",
+            "result": "254700000001"
+        },
+        {
+            "input": "0700000001 ",
+            "result": null
+        },
+        {
+            "input": " 0700000001",
+            "result": null
+        },
+        {
+            "input": "",
+            "result": null
+        },
+        {
+            "input": " ",
+            "result": null
+        },
+        {
+            "input": "07000000ab",
+            "result": null
+        },
+        {
+            "input": "070000001",
+            "result": null
+        },
+        {
+            "input": "07000000011",
+            "result": null
+        },
+        {
+            "input": "0201234567",
+            "result": null
+        },
+        {
+            "input": "700000001",
+            "result": null
+        },
+        {
+            "input": "+255700000001",
+            "result": null
+        },
+        {
+            "input": "+0700000001",
+            "result": null
+        },
+        {
+            "input": "00254700000001",
+            "result": null
+        },
+        {
+            "input": "2540700000001",
+            "result": null
+        },
+        {
+            "input": "254200000001",
+            "result": null
+        },
+        {
+            "input": "0700000001'; DROP",
+            "result": null
+        },
+        {
+            "input": "+254",
+            "result": null
+        },
+        {
+            "input": "+",
+            "result": null
+        },
+        {
+            "input": "0",
+            "result": null
+        },
+        {
+            "input": "254",
+            "result": null
+        },
+        {
+            "input": "0700\n000001",
+            "result": null
+        },
+        {
+            "input": "0712 345 678",
+            "result": "254712345678"
+        },
+        {
+            "input": "0100 000 000",
+            "result": "254100000000"
+        },
+        {
+            "input": "+254 7 0000 0001",
+            "result": "254700000001"
+        }
+    ],
+    "money": [
+        {
+            "input": 10,
+            "ok": true,
+            "cents": 1000,
+            "text": "KES 10.00"
+        },
+        {
+            "input": 1.0,
+            "ok": true,
+            "cents": 100,
+            "text": "KES 1.00"
+        },
+        {
+            "input": 10.5,
+            "ok": true,
+            "cents": 1050,
+            "text": "KES 10.50"
+        },
+        {
+            "input": 19.99,
+            "ok": true,
+            "cents": 1999,
+            "text": "KES 19.99"
+        },
+        {
+            "input": "10",
+            "ok": true,
+            "cents": 1000,
+            "text": "KES 10.00"
+        },
+        {
+            "input": "10.00",
+            "ok": true,
+            "cents": 1000,
+            "text": "KES 10.00"
+        },
+        {
+            "input": "10.5",
+            "ok": true,
+            "cents": 1050,
+            "text": "KES 10.50"
+        },
+        {
+            "input": "0.07",
+            "ok": true,
+            "cents": 7,
+            "text": "KES 0.07"
+        },
+        {
+            "input": 0,
+            "ok": true,
+            "cents": 0,
+            "text": "KES 0.00"
+        },
+        {
+            "input": "0",
+            "ok": true,
+            "cents": 0,
+            "text": "KES 0.00"
+        },
+        {
+            "input": "0.00",
+            "ok": true,
+            "cents": 0,
+            "text": "KES 0.00"
+        },
+        {
+            "input": 1000000000.0,
+            "ok": true,
+            "cents": 100000000000,
+            "text": "KES 1,000,000,000.00"
+        },
+        {
+            "input": 1000000000000.0,
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Amount is out of range."
+        },
+        {
+            "input": 150,
+            "ok": true,
+            "cents": 15000,
+            "text": "KES 150.00"
+        },
+        {
+            "input": 1500.25,
+            "ok": true,
+            "cents": 150025,
+            "text": "KES 1,500.25"
+        },
+        {
+            "input": 0.005,
+            "ok": true,
+            "cents": 1,
+            "text": "KES 0.01"
+        },
+        {
+            "input": 0.015,
+            "ok": true,
+            "cents": 2,
+            "text": "KES 0.02"
+        },
+        {
+            "input": "ten",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Amount is not a plain decimal number."
+        },
+        {
+            "input": "1.234",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Amount is not a plain decimal number."
+        },
+        {
+            "input": "1,000",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Amount is not a plain decimal number."
+        },
+        {
+            "input": "-5",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Amount is not a plain decimal number."
+        },
+        {
+            "input": "",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Amount is not a plain decimal number."
+        },
+        {
+            "input": " 12 ",
+            "ok": true,
+            "cents": 1200,
+            "text": "KES 12.00"
+        },
+        {
+            "input": "12.",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Amount is not a plain decimal number."
+        },
+        {
+            "input": ".5",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Amount is not a plain decimal number."
+        },
+        {
+            "input": "1e3",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Amount is not a plain decimal number."
+        },
+        {
+            "input": "123456789012",
+            "ok": true,
+            "cents": 12345678901200,
+            "text": "KES 123,456,789,012.00"
+        },
+        {
+            "input": "1234567890123",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Amount is not a plain decimal number."
+        },
+        {
+            "input": "99.99",
+            "ok": true,
+            "cents": 9999,
+            "text": "KES 99.99"
+        }
+    ],
+    "timestamps": [
+        {
+            "input": "2026-01-15T09:30:45Z",
+            "timestamp": "20260115123045"
+        },
+        {
+            "input": "2026-01-15T22:30:00Z",
+            "timestamp": "20260116013000"
+        },
+        {
+            "input": "2026-12-31T21:00:00Z",
+            "timestamp": "20270101000000"
+        },
+        {
+            "input": "2026-12-31T20:59:59Z",
+            "timestamp": "20261231235959"
+        },
+        {
+            "input": "2026-02-28T21:30:00Z",
+            "timestamp": "20260301003000"
+        },
+        {
+            "input": "2024-02-29T10:00:00Z",
+            "timestamp": "20240229130000"
+        },
+        {
+            "input": "2026-06-01T00:00:00Z",
+            "timestamp": "20260601030000"
+        }
+    ],
+    "passwords": [
+        {
+            "shortCode": "174379",
+            "passKey": "passkey",
+            "timestamp": "20260115123045",
+            "password": "MTc0Mzc5cGFzc2tleTIwMjYwMTE1MTIzMDQ1"
+        },
+        {
+            "shortCode": "174379",
+            "passKey": "mock-passkey-not-a-real-secret",
+            "timestamp": "20260116013000",
+            "password": "MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTYwMTMwMDA="
+        },
+        {
+            "shortCode": "600638",
+            "passKey": "",
+            "timestamp": "20260101000000",
+            "password": "NjAwNjM4MjAyNjAxMDEwMDAwMDA="
+        }
+    ],
+    "eatParse": [
+        {
+            "input": "20191219102115",
+            "ok": true,
+            "iso": "2019-12-19T10:21:15+03:00"
+        },
+        {
+            "input": "20260115123045",
+            "ok": true,
+            "iso": "2026-01-15T12:30:45+03:00"
+        },
+        {
+            "input": "20191399102115",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Timestamp is not a valid YmdHis value."
+        },
+        {
+            "input": "20190230000000",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Timestamp is not a valid YmdHis value."
+        },
+        {
+            "input": "20240229120000",
+            "ok": true,
+            "iso": "2024-02-29T12:00:00+03:00"
+        },
+        {
+            "input": "20260115246000",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Timestamp is not a valid YmdHis value."
+        },
+        {
+            "input": "20260115126000",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Timestamp is not a valid YmdHis value."
+        },
+        {
+            "input": "20260115120060",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Timestamp is not a valid YmdHis value."
+        },
+        {
+            "input": "2026011512304",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Timestamp is not a valid YmdHis value."
+        },
+        {
+            "input": "202601151230455",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Timestamp is not a valid YmdHis value."
+        },
+        {
+            "input": "2026-01-15",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Timestamp is not a valid YmdHis value."
+        },
+        {
+            "input": "abc",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Timestamp is not a valid YmdHis value."
+        },
+        {
+            "input": "",
+            "ok": false,
+            "type": "MalformedPayloadException",
+            "message": "Timestamp is not a valid YmdHis value."
+        }
+    ],
+    "urls": [
+        {
+            "input": "https://shop.example/cb",
+            "valid": true
+        },
+        {
+            "input": "http://127.0.0.1:4151/cb",
+            "valid": true
+        },
+        {
+            "input": "https://shop.example/hooks/stk/9f3a1c",
+            "valid": true
+        },
+        {
+            "input": "http://localhost/cb",
+            "valid": true
+        },
+        {
+            "input": "https://shop.example",
+            "valid": true
+        },
+        {
+            "input": "https://shop.example:8443/x?y=1#z",
+            "valid": true
+        },
+        {
+            "input": "https://user:pw@shop.example/cb",
+            "valid": true
+        },
+        {
+            "input": "https://sub-domain.shop.example/cb",
+            "valid": true
+        },
+        {
+            "input": "https://[::1]/cb",
+            "valid": true
+        },
+        {
+            "input": "https://shop_underscore.example/cb",
+            "valid": false
+        },
+        {
+            "input": "https://-bad.example/cb",
+            "valid": false
+        },
+        {
+            "input": "https://shop..example/cb",
+            "valid": false
+        },
+        {
+            "input": "https://shop.example/a b",
+            "valid": false
+        },
+        {
+            "input": "https://shop.example/ünï",
+            "valid": false
+        },
+        {
+            "input": "HTTPS://SHOP.EXAMPLE/CB",
+            "valid": true
+        },
+        {
+            "input": "https://",
+            "valid": false
+        },
+        {
+            "input": "https:///cb",
+            "valid": false
+        },
+        {
+            "input": "https://shop.example:99999/cb",
+            "valid": false
+        },
+        {
+            "input": "https://shop.example:abc/cb",
+            "valid": false
+        },
+        {
+            "input": "ftp://shop.example/cb",
+            "valid": false
+        },
+        {
+            "input": "javascript:alert(1)",
+            "valid": false
+        },
+        {
+            "input": "",
+            "valid": false
+        },
+        {
+            "input": "shop.example/cb",
+            "valid": false
+        },
+        {
+            "input": "http://a",
+            "valid": true
+        },
+        {
+            "input": "https://localhost:4151/cb",
+            "valid": true
+        },
+        {
+            "input": "https://1.2.3.4/cb",
+            "valid": true
+        },
+        {
+            "input": "https://999.1.1.1/cb",
+            "valid": true
+        },
+        {
+            "input": "https://shop.example./cb",
+            "valid": true
+        },
+        {
+            "input": "https://exa mple.com",
+            "valid": false
+        },
+        {
+            "input": "https://shop.example/cb?a=1&b=2",
+            "valid": true
+        },
+        {
+            "input": "http://shop.example/cb",
+            "valid": true
+        },
+        {
+            "input": "https://shop.example/%20ok",
+            "valid": true
+        },
+        {
+            "input": "https://shop.example/<x>",
+            "valid": true
+        },
+        {
+            "input": "https://a-.example/cb",
+            "valid": false
+        },
+        {
+            "input": "https://shop.example/\"q\"",
+            "valid": true
+        }
+    ],
+    "stkRequests": [
+        {
+            "name": "valid paybill",
+            "request": {
+                "ok": true,
+                "phone": "254700000001",
+                "type": "CustomerPayBillOnline"
+            },
+            "push": {
+                "ok": true,
+                "requests": [
+                    {
+                        "method": "GET",
+                        "url": "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic dGVzdC1rZXk6dGVzdC1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "sandbox.safaricom.co.ke"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    {
+                        "method": "POST",
+                        "url": "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer fake-access-token-0001"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "sandbox.safaricom.co.ke"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5dGVzdC1wYXNza2V5MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":150,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/hooks/stk\",\"AccountReference\":\"ORD-1\",\"TransactionDesc\":\"Shop order\"}"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "valid till",
+            "request": {
+                "ok": true,
+                "phone": "254700000001",
+                "type": "CustomerBuyGoodsOnline"
+            },
+            "push": {
+                "ok": true,
+                "requests": [
+                    {
+                        "method": "GET",
+                        "url": "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic dGVzdC1rZXk6dGVzdC1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "sandbox.safaricom.co.ke"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    {
+                        "method": "POST",
+                        "url": "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer fake-access-token-0001"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "sandbox.safaricom.co.ke"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5dGVzdC1wYXNza2V5MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerBuyGoodsOnline\",\"Amount\":150,\"PartyA\":254700000001,\"PartyB\":5123456,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/cb\",\"AccountReference\":\"ORD-1\",\"TransactionDesc\":\"Shop order\"}"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "plus 254 phone",
+            "request": {
+                "ok": true,
+                "phone": "254110000001",
+                "type": "CustomerPayBillOnline"
+            },
+            "push": {
+                "ok": true,
+                "requests": [
+                    {
+                        "method": "GET",
+                        "url": "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic dGVzdC1rZXk6dGVzdC1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "sandbox.safaricom.co.ke"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    {
+                        "method": "POST",
+                        "url": "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer fake-access-token-0001"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "sandbox.safaricom.co.ke"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5dGVzdC1wYXNza2V5MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":1,\"PartyA\":254110000001,\"PartyB\":174379,\"PhoneNumber\":254110000001,\"CallBackURL\":\"http://127.0.0.1:4151/cb\",\"AccountReference\":\"A\",\"TransactionDesc\":\"B\"}"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "amount zero",
+            "request": {
+                "ok": false,
+                "type": "ValidationException",
+                "message": "Amount must be a whole number of shillings, at least 1."
+            }
+        },
+        {
+            "name": "amount negative",
+            "request": {
+                "ok": false,
+                "type": "ValidationException",
+                "message": "Amount must be a whole number of shillings, at least 1."
+            }
+        },
+        {
+            "name": "bad phone",
+            "request": {
+                "ok": false,
+                "type": "ValidationException",
+                "message": "Phone number must be a Kenyan mobile number: 07XXXXXXXX, 01XXXXXXXX, +254XXXXXXXXX or 254XXXXXXXXX."
+            }
+        },
+        {
+            "name": "bad url no scheme",
+            "request": {
+                "ok": false,
+                "type": "ValidationException",
+                "message": "Callback URL must be an absolute http(s) URL."
+            }
+        },
+        {
+            "name": "bad url javascript",
+            "request": {
+                "ok": false,
+                "type": "ValidationException",
+                "message": "Callback URL must be an absolute http(s) URL."
+            }
+        },
+        {
+            "name": "empty reference",
+            "request": {
+                "ok": false,
+                "type": "ValidationException",
+                "message": "Account reference and transaction description are required."
+            }
+        },
+        {
+            "name": "blank description",
+            "request": {
+                "ok": false,
+                "type": "ValidationException",
+                "message": "Account reference and transaction description are required."
+            }
+        },
+        {
+            "name": "till without valid partyB",
+            "request": {
+                "ok": false,
+                "type": "ValidationException",
+                "message": "PartyB must be a 5 to 7 digit short code or till number."
+            }
+        },
+        {
+            "name": "reference too long",
+            "request": {
+                "ok": true,
+                "phone": "254700000001",
+                "type": "CustomerPayBillOnline"
+            },
+            "push": {
+                "ok": false,
+                "type": "ValidationException",
+                "message": "Account reference is longer than 12 characters."
+            }
+        },
+        {
+            "name": "description too long",
+            "request": {
+                "ok": true,
+                "phone": "254700000001",
+                "type": "CustomerPayBillOnline"
+            },
+            "push": {
+                "ok": false,
+                "type": "ValidationException",
+                "message": "Transaction description is longer than 13 characters."
+            }
+        },
+        {
+            "name": "reference at the limit",
+            "request": {
+                "ok": true,
+                "phone": "254700000001",
+                "type": "CustomerPayBillOnline"
+            },
+            "push": {
+                "ok": true,
+                "requests": [
+                    {
+                        "method": "GET",
+                        "url": "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic dGVzdC1rZXk6dGVzdC1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "sandbox.safaricom.co.ke"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    {
+                        "method": "POST",
+                        "url": "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer fake-access-token-0001"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "sandbox.safaricom.co.ke"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5dGVzdC1wYXNza2V5MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":150,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/cb\",\"AccountReference\":\"ABCDEFGHIJKL\",\"TransactionDesc\":\"ABCDEFGHIJKLM\"}"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "reference with multibyte characters",
+            "request": {
+                "ok": true,
+                "phone": "254700000001",
+                "type": "CustomerPayBillOnline"
+            },
+            "push": {
+                "ok": true,
+                "requests": [
+                    {
+                        "method": "GET",
+                        "url": "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic dGVzdC1rZXk6dGVzdC1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "sandbox.safaricom.co.ke"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    {
+                        "method": "POST",
+                        "url": "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer fake-access-token-0001"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "sandbox.safaricom.co.ke"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5dGVzdC1wYXNza2V5MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":150,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/cb\",\"AccountReference\":\"Maziwa ééééé\",\"TransactionDesc\":\"Order\"}"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "first error wins: phone before url",
+            "request": {
+                "ok": false,
+                "type": "ValidationException",
+                "message": "Phone number must be a Kenyan mobile number: 07XXXXXXXX, 01XXXXXXXX, +254XXXXXXXXX or 254XXXXXXXXX."
+            }
+        }
+    ],
+    "callbacks": [
+        {
+            "name": "success fixture",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 0,
+                "resultDesc": "The service request is processed successfully.",
+                "amountCents": 100,
+                "receipt": "NLJ7RT61SV",
+                "transactionDate": "2019-12-19T10:21:15+03:00",
+                "phone": "254700000001",
+                "metadata": {
+                    "Amount": 1.0,
+                    "MpesaReceiptNumber": "NLJ7RT61SV",
+                    "TransactionDate": 20191219102115,
+                    "PhoneNumber": 254700000001
+                },
+                "isSuccessful": true,
+                "outcome": "success",
+                "resultName": "Success"
+            }
+        },
+        {
+            "name": "cancelled fixture",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 1032,
+                "resultDesc": "Request cancelled by user",
+                "amountCents": null,
+                "receipt": null,
+                "transactionDate": null,
+                "phone": null,
+                "metadata": {},
+                "isSuccessful": false,
+                "outcome": "cancelled",
+                "resultName": "CancelledByUser"
+            }
+        },
+        {
+            "name": "code 1",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 1,
+                "resultDesc": "Request cancelled by user",
+                "amountCents": null,
+                "receipt": null,
+                "transactionDate": null,
+                "phone": null,
+                "metadata": {},
+                "isSuccessful": false,
+                "outcome": "insufficient_funds",
+                "resultName": "InsufficientFunds"
+            }
+        },
+        {
+            "name": "code 1037",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 1037,
+                "resultDesc": "Request cancelled by user",
+                "amountCents": null,
+                "receipt": null,
+                "transactionDate": null,
+                "phone": null,
+                "metadata": {},
+                "isSuccessful": false,
+                "outcome": "timed_out",
+                "resultName": "UserUnreachable"
+            }
+        },
+        {
+            "name": "code 2001",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 2001,
+                "resultDesc": "Request cancelled by user",
+                "amountCents": null,
+                "receipt": null,
+                "transactionDate": null,
+                "phone": null,
+                "metadata": {},
+                "isSuccessful": false,
+                "outcome": "wrong_pin",
+                "resultName": "WrongPin"
+            }
+        },
+        {
+            "name": "code 1019",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 1019,
+                "resultDesc": "Request cancelled by user",
+                "amountCents": null,
+                "receipt": null,
+                "transactionDate": null,
+                "phone": null,
+                "metadata": {},
+                "isSuccessful": false,
+                "outcome": "timed_out",
+                "resultName": "TransactionExpired"
+            }
+        },
+        {
+            "name": "unlisted code 4242",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 4242,
+                "resultDesc": "Request cancelled by user",
+                "amountCents": null,
+                "receipt": null,
+                "transactionDate": null,
+                "phone": null,
+                "metadata": {},
+                "isSuccessful": false,
+                "outcome": "failed",
+                "resultName": null
+            }
+        },
+        {
+            "name": "result code as string",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 1032,
+                "resultDesc": "Request cancelled by user",
+                "amountCents": null,
+                "receipt": null,
+                "transactionDate": null,
+                "phone": null,
+                "metadata": {},
+                "isSuccessful": false,
+                "outcome": "cancelled",
+                "resultName": "CancelledByUser"
+            }
+        },
+        {
+            "name": "amount with cents",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 0,
+                "resultDesc": "The service request is processed successfully.",
+                "amountCents": 1050,
+                "receipt": "NLJ7RT61SV",
+                "transactionDate": "2019-12-19T10:21:15+03:00",
+                "phone": "254700000001",
+                "metadata": {
+                    "Amount": 10.5,
+                    "MpesaReceiptNumber": "NLJ7RT61SV",
+                    "TransactionDate": 20191219102115,
+                    "PhoneNumber": 254700000001
+                },
+                "isSuccessful": true,
+                "outcome": "success",
+                "resultName": "Success"
+            }
+        },
+        {
+            "name": "amount as string",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 0,
+                "resultDesc": "The service request is processed successfully.",
+                "amountCents": 1250,
+                "receipt": "NLJ7RT61SV",
+                "transactionDate": "2019-12-19T10:21:15+03:00",
+                "phone": "254700000001",
+                "metadata": {
+                    "Amount": "12.50",
+                    "MpesaReceiptNumber": "NLJ7RT61SV",
+                    "TransactionDate": 20191219102115,
+                    "PhoneNumber": 254700000001
+                },
+                "isSuccessful": true,
+                "outcome": "success",
+                "resultName": "Success"
+            }
+        },
+        {
+            "name": "amount as bad string",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Amount is not a plain decimal number."
+        },
+        {
+            "name": "no receipt",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Receipt / transaction id is missing or has an unexpected format."
+        },
+        {
+            "name": "receipt with spaces",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Receipt / transaction id is missing or has an unexpected format."
+        },
+        {
+            "name": "receipt too short",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Receipt / transaction id is missing or has an unexpected format."
+        },
+        {
+            "name": "no amount",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "A successful callback must carry an Amount item."
+        },
+        {
+            "name": "zero amount",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Amount must be positive."
+        },
+        {
+            "name": "boolean amount",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "A successful callback must carry an Amount item."
+        },
+        {
+            "name": "no date",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "A successful callback must carry a TransactionDate item."
+        },
+        {
+            "name": "impossible date",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Timestamp is not a valid YmdHis value."
+        },
+        {
+            "name": "date as string",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 0,
+                "resultDesc": "The service request is processed successfully.",
+                "amountCents": 100,
+                "receipt": "NLJ7RT61SV",
+                "transactionDate": "2019-12-19T10:21:15+03:00",
+                "phone": "254700000001",
+                "metadata": {
+                    "Amount": 1.0,
+                    "MpesaReceiptNumber": "NLJ7RT61SV",
+                    "TransactionDate": "20191219102115",
+                    "PhoneNumber": 254700000001
+                },
+                "isSuccessful": true,
+                "outcome": "success",
+                "resultName": "Success"
+            }
+        },
+        {
+            "name": "phone as string",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 0,
+                "resultDesc": "The service request is processed successfully.",
+                "amountCents": 100,
+                "receipt": "NLJ7RT61SV",
+                "transactionDate": "2019-12-19T10:21:15+03:00",
+                "phone": "254700000001",
+                "metadata": {
+                    "Amount": 1.0,
+                    "MpesaReceiptNumber": "NLJ7RT61SV",
+                    "TransactionDate": 20191219102115,
+                    "PhoneNumber": "0700000001"
+                },
+                "isSuccessful": true,
+                "outcome": "success",
+                "resultName": "Success"
+            }
+        },
+        {
+            "name": "phone unparseable",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 0,
+                "resultDesc": "The service request is processed successfully.",
+                "amountCents": 100,
+                "receipt": "NLJ7RT61SV",
+                "transactionDate": "2019-12-19T10:21:15+03:00",
+                "phone": null,
+                "metadata": {
+                    "Amount": 1.0,
+                    "MpesaReceiptNumber": "NLJ7RT61SV",
+                    "TransactionDate": 20191219102115,
+                    "PhoneNumber": 12345
+                },
+                "isSuccessful": true,
+                "outcome": "success",
+                "resultName": "Success"
+            }
+        },
+        {
+            "name": "no phone item",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "29115-34620561-1",
+                "checkoutRequestId": "ws_CO_191220191020363925",
+                "resultCode": 0,
+                "resultDesc": "The service request is processed successfully.",
+                "amountCents": 100,
+                "receipt": "NLJ7RT61SV",
+                "transactionDate": "2019-12-19T10:21:15+03:00",
+                "phone": null,
+                "metadata": {
+                    "Amount": 1.0,
+                    "MpesaReceiptNumber": "NLJ7RT61SV",
+                    "TransactionDate": 20191219102115,
+                    "Other": 1
+                },
+                "isSuccessful": true,
+                "outcome": "success",
+                "resultName": "Success"
+            }
+        },
+        {
+            "name": "empty body",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Callback body is empty or too large."
+        },
+        {
+            "name": "not json",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Callback body is not a JSON object."
+        },
+        {
+            "name": "json list",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Callback body is not a JSON object."
+        },
+        {
+            "name": "json scalar",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Callback body is not a JSON object."
+        },
+        {
+            "name": "json null",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Callback body is not a JSON object."
+        },
+        {
+            "name": "missing Body",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Field \"Body\" must be an object."
+        },
+        {
+            "name": "missing stkCallback",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Field \"Body.stkCallback\" must be an object."
+        },
+        {
+            "name": "Body is a list",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Field \"Body\" must be an object."
+        },
+        {
+            "name": "missing checkout id",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Field \"Body.stkCallback.CheckoutRequestID\" must be a non-empty string."
+        },
+        {
+            "name": "missing result code",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Field \"Body.stkCallback.ResultCode\" must be an integer."
+        },
+        {
+            "name": "non numeric result code",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Field \"Body.stkCallback.ResultCode\" must be an integer."
+        },
+        {
+            "name": "success without metadata",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "A successful callback must carry CallbackMetadata."
+        },
+        {
+            "name": "numeric ids are stringified",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "1",
+                "checkoutRequestId": "2",
+                "resultCode": 1032,
+                "resultDesc": "x",
+                "amountCents": null,
+                "receipt": null,
+                "transactionDate": null,
+                "phone": null,
+                "metadata": {},
+                "isSuccessful": false,
+                "outcome": "cancelled",
+                "resultName": "CancelledByUser"
+            }
+        },
+        {
+            "name": "result desc missing is empty",
+            "ok": true,
+            "parsed": {
+                "merchantRequestId": "1",
+                "checkoutRequestId": "2",
+                "resultCode": 1032,
+                "resultDesc": "",
+                "amountCents": null,
+                "receipt": null,
+                "transactionDate": null,
+                "phone": null,
+                "metadata": {},
+                "isSuccessful": false,
+                "outcome": "cancelled",
+                "resultName": "CancelledByUser"
+            }
+        },
+        {
+            "name": "result desc is a list",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Field \"Body.stkCallback.ResultDesc\" must be a string."
+        },
+        {
+            "name": "metadata item is not an object",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Field \"Body.stkCallback.CallbackMetadata.Item[0]\" must be an object."
+        },
+        {
+            "name": "metadata Item is not a list",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Field \"Body.stkCallback.CallbackMetadata.Item\" must be a list."
+        },
+        {
+            "name": "item value is an object",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Field \"Body.stkCallback.CallbackMetadata.Item[0].Value\" must be a scalar value."
+        },
+        {
+            "name": "oversized",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Callback body is empty or too large."
+        },
+        {
+            "name": "too deep",
+            "ok": false,
+            "type": "InvalidCallbackPayloadException",
+            "message": "Callback body is not a JSON object."
+        }
+    ],
+    "processor": [
+        {
+            "name": "six deliveries credit once",
+            "steps": [
+                {
+                    "outcome": "handled",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                },
+                {
+                    "outcome": "duplicate",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                },
+                {
+                    "outcome": "duplicate",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                },
+                {
+                    "outcome": "duplicate",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                },
+                {
+                    "outcome": "duplicate",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                },
+                {
+                    "outcome": "duplicate",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                }
+            ]
+        },
+        {
+            "name": "a failing handler releases the key",
+            "steps": [
+                {
+                    "exception": {
+                        "type": "RuntimeException",
+                        "message": "database is down"
+                    },
+                    "handlerCalls": 1,
+                    "inner": null
+                },
+                {
+                    "outcome": "handled",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 2,
+                    "inner": null
+                },
+                {
+                    "outcome": "duplicate",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 2,
+                    "inner": null
+                }
+            ]
+        },
+        {
+            "name": "re-entrant delivery is in progress",
+            "steps": [
+                {
+                    "outcome": "handled",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": "in_progress"
+                },
+                {
+                    "outcome": "duplicate",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                }
+            ]
+        },
+        {
+            "name": "malformed payload claims no key",
+            "steps": [
+                {
+                    "exception": {
+                        "type": "InvalidCallbackPayloadException",
+                        "message": "Field \"Body.stkCallback\" must be an object."
+                    },
+                    "handlerCalls": 0,
+                    "inner": null
+                },
+                {
+                    "outcome": "handled",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                }
+            ]
+        },
+        {
+            "name": "amount mismatch is rejected before a key is claimed",
+            "steps": [
+                {
+                    "exception": {
+                        "type": "PaymentMismatchException",
+                        "message": "Callback does not match the originating request: paid amount KES 1.00, expected KES 1,500.00"
+                    },
+                    "handlerCalls": 0,
+                    "inner": null
+                },
+                {
+                    "outcome": "handled",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                },
+                {
+                    "outcome": "duplicate",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                }
+            ]
+        },
+        {
+            "name": "phone mismatch",
+            "steps": [
+                {
+                    "exception": {
+                        "type": "PaymentMismatchException",
+                        "message": "Callback does not match the originating request: payer phone number differs from the one the prompt was sent to"
+                    },
+                    "handlerCalls": 0,
+                    "inner": null
+                },
+                {
+                    "outcome": "handled",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                }
+            ]
+        },
+        {
+            "name": "unknown checkout request is rejected",
+            "steps": [
+                {
+                    "exception": {
+                        "type": "PaymentMismatchException",
+                        "message": "Callback does not match the originating request: no originating request found for CheckoutRequestID ws_CO_191220191020363925"
+                    },
+                    "handlerCalls": 0,
+                    "inner": null
+                },
+                {
+                    "outcome": "handled",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                }
+            ]
+        },
+        {
+            "name": "failed callbacks are processed and skip the amount check",
+            "steps": [
+                {
+                    "outcome": "handled",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                },
+                {
+                    "outcome": "duplicate",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                }
+            ]
+        },
+        {
+            "name": "a late cancel after a success is a duplicate",
+            "steps": [
+                {
+                    "outcome": "handled",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                },
+                {
+                    "outcome": "duplicate",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                }
+            ]
+        },
+        {
+            "name": "success after a cancel is a duplicate too",
+            "steps": [
+                {
+                    "outcome": "handled",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                },
+                {
+                    "outcome": "duplicate",
+                    "key": "stk:ws_CO_191220191020363925",
+                    "ack": "{\"ResultCode\":0,\"ResultDesc\":\"Accepted\"}",
+                    "handlerCalls": 1,
+                    "inner": null
+                }
+            ]
+        }
+    ],
+    "wire": [
+        {
+            "name": "paybill, normalised phone",
+            "action": "accept",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":150,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/hooks/stk/9f3a1c\",\"AccountReference\":\"ORD-1042\",\"TransactionDesc\":\"Shop order\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"0\",\"ResultDesc\":\"The service request is processed successfully.\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 0,
+                "outcome": "success"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "https://shop.example/hooks/stk/9f3a1c",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "shop.example"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":0,\"ResultDesc\":\"The service request is processed successfully.\",\"CallbackMetadata\":{\"Item\":[{\"Name\":\"Amount\",\"Value\":150.0},{\"Name\":\"MpesaReceiptNumber\",\"Value\":\"<receipt>\"},{\"Name\":\"TransactionDate\",\"Value\":20260115123045},{\"Name\":\"PhoneNumber\",\"Value\":254700000001}]}}}}"
+                }
+            ]
+        },
+        {
+            "name": "paybill, normalised phone",
+            "action": "cancel",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":150,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/hooks/stk/9f3a1c\",\"AccountReference\":\"ORD-1042\",\"TransactionDesc\":\"Shop order\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"1032\",\"ResultDesc\":\"Request cancelled by user\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 1032,
+                "outcome": "cancelled"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "https://shop.example/hooks/stk/9f3a1c",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "shop.example"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":1032,\"ResultDesc\":\"Request cancelled by user\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "paybill, normalised phone",
+            "action": "insufficient",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":150,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/hooks/stk/9f3a1c\",\"AccountReference\":\"ORD-1042\",\"TransactionDesc\":\"Shop order\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"1\",\"ResultDesc\":\"The balance is insufficient for the transaction\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 1,
+                "outcome": "insufficient_funds"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "https://shop.example/hooks/stk/9f3a1c",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "shop.example"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":1,\"ResultDesc\":\"The balance is insufficient for the transaction\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "paybill, normalised phone",
+            "action": "wrong_pin",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":150,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/hooks/stk/9f3a1c\",\"AccountReference\":\"ORD-1042\",\"TransactionDesc\":\"Shop order\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"2001\",\"ResultDesc\":\"The initiator information is invalid.\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 2001,
+                "outcome": "wrong_pin"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "https://shop.example/hooks/stk/9f3a1c",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "shop.example"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":2001,\"ResultDesc\":\"The initiator information is invalid.\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "paybill, normalised phone",
+            "action": "timeout",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":150,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/hooks/stk/9f3a1c\",\"AccountReference\":\"ORD-1042\",\"TransactionDesc\":\"Shop order\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMxNDU=\",\"Timestamp\":\"20260115123145\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"1037\",\"ResultDesc\":\"DS timeout user cannot be reached\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 1037,
+                "outcome": "timed_out"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "https://shop.example/hooks/stk/9f3a1c",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "shop.example"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":1037,\"ResultDesc\":\"DS timeout user cannot be reached\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "paybill, normalised phone",
+            "action": "lost",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":150,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/hooks/stk/9f3a1c\",\"AccountReference\":\"ORD-1042\",\"TransactionDesc\":\"Shop order\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMxMTU=\",\"Timestamp\":\"20260115123115\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"0\",\"ResultDesc\":\"The service request is processed successfully.\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 0,
+                "outcome": "success"
+            },
+            "callbacks": []
+        },
+        {
+            "name": "till",
+            "action": "accept",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerBuyGoodsOnline\",\"Amount\":320,\"PartyA\":254110000001,\"PartyB\":5123456,\"PhoneNumber\":254110000001,\"CallBackURL\":\"http://127.0.0.1:4151/hooks/stk\",\"AccountReference\":\"TILL-7\",\"TransactionDesc\":\"Cooking oil\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"0\",\"ResultDesc\":\"The service request is processed successfully.\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 0,
+                "outcome": "success"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "http://127.0.0.1:4151/hooks/stk",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "127.0.0.1:4151"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":0,\"ResultDesc\":\"The service request is processed successfully.\",\"CallbackMetadata\":{\"Item\":[{\"Name\":\"Amount\",\"Value\":320.0},{\"Name\":\"MpesaReceiptNumber\",\"Value\":\"<receipt>\"},{\"Name\":\"TransactionDate\",\"Value\":20260115123045},{\"Name\":\"PhoneNumber\",\"Value\":254110000001}]}}}}"
+                }
+            ]
+        },
+        {
+            "name": "till",
+            "action": "cancel",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerBuyGoodsOnline\",\"Amount\":320,\"PartyA\":254110000001,\"PartyB\":5123456,\"PhoneNumber\":254110000001,\"CallBackURL\":\"http://127.0.0.1:4151/hooks/stk\",\"AccountReference\":\"TILL-7\",\"TransactionDesc\":\"Cooking oil\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"1032\",\"ResultDesc\":\"Request cancelled by user\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 1032,
+                "outcome": "cancelled"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "http://127.0.0.1:4151/hooks/stk",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "127.0.0.1:4151"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":1032,\"ResultDesc\":\"Request cancelled by user\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "till",
+            "action": "insufficient",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerBuyGoodsOnline\",\"Amount\":320,\"PartyA\":254110000001,\"PartyB\":5123456,\"PhoneNumber\":254110000001,\"CallBackURL\":\"http://127.0.0.1:4151/hooks/stk\",\"AccountReference\":\"TILL-7\",\"TransactionDesc\":\"Cooking oil\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"1\",\"ResultDesc\":\"The balance is insufficient for the transaction\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 1,
+                "outcome": "insufficient_funds"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "http://127.0.0.1:4151/hooks/stk",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "127.0.0.1:4151"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":1,\"ResultDesc\":\"The balance is insufficient for the transaction\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "till",
+            "action": "wrong_pin",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerBuyGoodsOnline\",\"Amount\":320,\"PartyA\":254110000001,\"PartyB\":5123456,\"PhoneNumber\":254110000001,\"CallBackURL\":\"http://127.0.0.1:4151/hooks/stk\",\"AccountReference\":\"TILL-7\",\"TransactionDesc\":\"Cooking oil\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"2001\",\"ResultDesc\":\"The initiator information is invalid.\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 2001,
+                "outcome": "wrong_pin"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "http://127.0.0.1:4151/hooks/stk",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "127.0.0.1:4151"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":2001,\"ResultDesc\":\"The initiator information is invalid.\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "till",
+            "action": "timeout",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerBuyGoodsOnline\",\"Amount\":320,\"PartyA\":254110000001,\"PartyB\":5123456,\"PhoneNumber\":254110000001,\"CallBackURL\":\"http://127.0.0.1:4151/hooks/stk\",\"AccountReference\":\"TILL-7\",\"TransactionDesc\":\"Cooking oil\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMxNDU=\",\"Timestamp\":\"20260115123145\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"1037\",\"ResultDesc\":\"DS timeout user cannot be reached\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 1037,
+                "outcome": "timed_out"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "http://127.0.0.1:4151/hooks/stk",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "127.0.0.1:4151"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":1037,\"ResultDesc\":\"DS timeout user cannot be reached\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "till",
+            "action": "lost",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerBuyGoodsOnline\",\"Amount\":320,\"PartyA\":254110000001,\"PartyB\":5123456,\"PhoneNumber\":254110000001,\"CallBackURL\":\"http://127.0.0.1:4151/hooks/stk\",\"AccountReference\":\"TILL-7\",\"TransactionDesc\":\"Cooking oil\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMxMTU=\",\"Timestamp\":\"20260115123115\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"0\",\"ResultDesc\":\"The service request is processed successfully.\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 0,
+                "outcome": "success"
+            },
+            "callbacks": []
+        },
+        {
+            "name": "one shilling",
+            "action": "accept",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":1,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/cb\",\"AccountReference\":\"A\",\"TransactionDesc\":\"B\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"0\",\"ResultDesc\":\"The service request is processed successfully.\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 0,
+                "outcome": "success"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "https://shop.example/cb",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "shop.example"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":0,\"ResultDesc\":\"The service request is processed successfully.\",\"CallbackMetadata\":{\"Item\":[{\"Name\":\"Amount\",\"Value\":1.0},{\"Name\":\"MpesaReceiptNumber\",\"Value\":\"<receipt>\"},{\"Name\":\"TransactionDate\",\"Value\":20260115123045},{\"Name\":\"PhoneNumber\",\"Value\":254700000001}]}}}}"
+                }
+            ]
+        },
+        {
+            "name": "one shilling",
+            "action": "cancel",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":1,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/cb\",\"AccountReference\":\"A\",\"TransactionDesc\":\"B\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"1032\",\"ResultDesc\":\"Request cancelled by user\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 1032,
+                "outcome": "cancelled"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "https://shop.example/cb",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "shop.example"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":1032,\"ResultDesc\":\"Request cancelled by user\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "one shilling",
+            "action": "insufficient",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":1,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/cb\",\"AccountReference\":\"A\",\"TransactionDesc\":\"B\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"1\",\"ResultDesc\":\"The balance is insufficient for the transaction\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 1,
+                "outcome": "insufficient_funds"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "https://shop.example/cb",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "shop.example"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":1,\"ResultDesc\":\"The balance is insufficient for the transaction\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "one shilling",
+            "action": "wrong_pin",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":1,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/cb\",\"AccountReference\":\"A\",\"TransactionDesc\":\"B\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"2001\",\"ResultDesc\":\"The initiator information is invalid.\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 2001,
+                "outcome": "wrong_pin"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "https://shop.example/cb",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "shop.example"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":2001,\"ResultDesc\":\"The initiator information is invalid.\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "one shilling",
+            "action": "timeout",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":1,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/cb\",\"AccountReference\":\"A\",\"TransactionDesc\":\"B\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMxNDU=\",\"Timestamp\":\"20260115123145\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"1037\",\"ResultDesc\":\"DS timeout user cannot be reached\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 1037,
+                "outcome": "timed_out"
+            },
+            "callbacks": [
+                {
+                    "method": "POST",
+                    "url": "https://shop.example/cb",
+                    "headers": [
+                        [
+                            "Content-Type",
+                            "application/json"
+                        ],
+                        [
+                            "Accept",
+                            "application/json"
+                        ],
+                        [
+                            "User-Agent",
+                            "daraja-mock/1"
+                        ],
+                        [
+                            "Host",
+                            "shop.example"
+                        ]
+                    ],
+                    "body": "{\"Body\":{\"stkCallback\":{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":1037,\"ResultDesc\":\"DS timeout user cannot be reached\"}}}"
+                }
+            ]
+        },
+        {
+            "name": "one shilling",
+            "action": "lost",
+            "exchanges": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:4150/oauth/v1/generate?grant_type=client_credentials",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Basic bW9jay1jb25zdW1lci1rZXk6bW9jay1jb25zdW1lci1zZWNyZXQ="
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": ""
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"access_token\":\"MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm\",\"expires_in\":\"3599\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpush/v1/processrequest",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"TransactionType\":\"CustomerPayBillOnline\",\"Amount\":1,\"PartyA\":254700000001,\"PartyB\":174379,\"PhoneNumber\":254700000001,\"CallBackURL\":\"https://shop.example/cb\",\"AccountReference\":\"A\",\"TransactionDesc\":\"B\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMwNDU=\",\"Timestamp\":\"20260115123045\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 500,
+                        "body": "{\"requestId\":\"<id>\",\"errorCode\":\"500.001.1001\",\"errorMessage\":\"The transaction is being processed\"}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:4150/mpesa/stkpushquery/v1/query",
+                        "headers": [
+                            [
+                                "Authorization",
+                                "Bearer MTc2ODQ3MzA0NC5jNDliZWU0NzQ0OWUxMTRiZTkxZWZmOGJiMjAyOTIyYzcwYmEyNDQ5MTM5ZWZiNWYzMTQ5MTRjYTZmYTk5Y2Jm"
+                            ],
+                            [
+                                "Content-Type",
+                                "application/json"
+                            ],
+                            [
+                                "Accept",
+                                "application/json"
+                            ],
+                            [
+                                "Host",
+                                "127.0.0.1:4150"
+                            ]
+                        ],
+                        "body": "{\"BusinessShortCode\":174379,\"Password\":\"MTc0Mzc5bW9jay1wYXNza2V5LW5vdC1hLXJlYWwtc2VjcmV0MjAyNjAxMTUxMjMxMTU=\",\"Timestamp\":\"20260115123115\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\"}"
+                    },
+                    "response": {
+                        "status": 200,
+                        "body": "{\"ResponseCode\":\"0\",\"ResponseDescription\":\"The service request has been accepted successfully\",\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResultCode\":\"0\",\"ResultDesc\":\"The service request is processed successfully.\"}"
+                    }
+                }
+            ],
+            "firstQueryPending": true,
+            "afterQuery": {
+                "pending": false,
+                "resultCode": 0,
+                "outcome": "success"
+            },
+            "callbacks": []
+        }
+    ],
+    "mockBadFields": [
+        {
+            "field": "Amount",
+            "value": 0,
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid Amount\"}"
+        },
+        {
+            "field": "Amount",
+            "value": "lots",
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid Amount\"}"
+        },
+        {
+            "field": "Amount",
+            "value": "12",
+            "status": 200,
+            "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+        },
+        {
+            "field": "Amount",
+            "value": 12.5,
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid Amount\"}"
+        },
+        {
+            "field": "PhoneNumber",
+            "value": 712345,
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid PhoneNumber\"}"
+        },
+        {
+            "field": "PhoneNumber",
+            "value": "0700000001",
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid PhoneNumber\"}"
+        },
+        {
+            "field": "PhoneNumber",
+            "value": 254700000001,
+            "status": 200,
+            "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+        },
+        {
+            "field": "PartyA",
+            "value": 712345,
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid PartyA\"}"
+        },
+        {
+            "field": "PartyB",
+            "value": "abc",
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid PartyB\"}"
+        },
+        {
+            "field": "PartyB",
+            "value": 1234567,
+            "status": 200,
+            "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+        },
+        {
+            "field": "TransactionType",
+            "value": "Teleport",
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid TransactionType\"}"
+        },
+        {
+            "field": "TransactionType",
+            "value": "CustomerBuyGoodsOnline",
+            "status": 200,
+            "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+        },
+        {
+            "field": "BusinessShortCode",
+            "value": 999999,
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid BusinessShortCode\"}"
+        },
+        {
+            "field": "Password",
+            "value": "bm9wZQ==",
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid Password\"}"
+        },
+        {
+            "field": "Timestamp",
+            "value": "now",
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid Timestamp\"}"
+        },
+        {
+            "field": "Timestamp",
+            "value": "20260115",
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid Timestamp\"}"
+        },
+        {
+            "field": "CallBackURL",
+            "value": "javascript:alert(1)",
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.02\",\"errorMessage\":\"Bad Request - Invalid CallBackURL\"}"
+        },
+        {
+            "field": "CallBackURL",
+            "value": "https://shop.example/cb",
+            "status": 200,
+            "body": "{\"MerchantRequestID\":\"<id>\",\"CheckoutRequestID\":\"ws_CO_20260115123045<n>\",\"ResponseCode\":\"0\",\"ResponseDescription\":\"Success. Request accepted for processing\",\"CustomerMessage\":\"Success. Request accepted for processing\"}"
+        },
+        {
+            "field": "AccountReference",
+            "value": "",
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.05\",\"errorMessage\":\"Invalid Request Payload\"}"
+        },
+        {
+            "field": "TransactionDesc",
+            "value": "",
+            "status": 400,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"400.002.05\",\"errorMessage\":\"Invalid Request Payload\"}"
+        }
+    ],
+    "mockAuth": {
+        "noToken": {
+            "status": 401,
+            "body": "{\"requestId\":\"<id>\",\"errorCode\":\"404.001.03\",\"errorMessage\":\"Invalid Access Token\"}"
+        },
+        "forged": {
+            "status": 401
+        }
+    }
+}

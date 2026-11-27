@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Interactive explainer for daraja-php, a strictly typed PHP client for M-Pesa Daraja. Build an STK push, choose how the mock server answers, and watch the callback handler. Runs in the browser on invented data.">
+<title>daraja-php playground</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script type="module" src="js/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#playground">Skip to the playground</a>
+
+<div class="banner" role="region" aria-label="About this demo">
+  <p><strong>Static demo.</strong> Runs in your browser on invented data; nothing is sent anywhere. The real project is a PHP library with a mock Daraja server:
+    <a href="https://github.com/Victor-Wambua/daraja-php">repository</a> and <a href="https://github.com/Victor-Wambua/daraja-php#readme">README</a>.
+    <a href="#how">What is real here</a>.</p>
+</div>
+
+<header class="masthead">
+  <p class="eyebrow">A strictly typed PHP client for M-Pesa Daraja</p>
+  <h1>daraja-php playground</h1>
+  <p class="lede">Fill in an STK push, pick how the mock Daraja server answers, then read the HTTP the client builds and what the callback handler does with each answer.</p>
+  <nav aria-label="Sections">
+    <ul>
+      <li><a href="#playground">Playground</a></li>
+      <li><a href="#how">How this demo works</a></li>
+      <li><a href="#php">PHP snippets</a></li>
+      <li><a href="#run">Run the real thing</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <section id="playground" aria-labelledby="h-playground">
+    <h2 id="h-playground">Playground</h2>
+
+    <aside class="try" aria-labelledby="h-try">
+      <h3 id="h-try">Try this</h3>
+      <ol>
+        <li><button type="button" class="link" data-try="accept">Customer accepts</button> Read the token request, the push body and how the Password is built.</li>
+        <li><button type="button" class="link" data-try="cancel">Customer cancels</button> A failed payment is still a callback.</li>
+        <li><button type="button" class="link" data-try="duplicate">Callback delivered twice</button> The handler runs once.</li>
+        <li><button type="button" class="link" data-try="out_of_order">Callback overtakes your app</button> Rejected with 422, then handled on retry.</li>
+        <li><button type="button" class="link" data-try="lost">Callback never arrives</button> Ask Daraja with an STK query.</li>
+      </ol>
+      <p class="small">Or type <code>12345</code> as the phone number and press Send.</p>
+    </aside>
+
+    <div class="playground">
+      <div class="controls">
+        <form id="form" novalidate autocomplete="off">
+          <h3><span class="num" aria-hidden="true">1</span>The request</h3>
+
+          <div class="field">
+            <label for="phone">Customer phone</label>
+            <input id="phone" name="phone" type="text" inputmode="tel" autocomplete="off" aria-describedby="phone-hint phone-err">
+            <p class="hint" id="phone-hint">Sent as <code id="phone-norm"></code></p>
+            <p class="err" id="phone-err" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="amount">Amount, whole KES</label>
+            <input id="amount" name="amount" type="text" inputmode="numeric" autocomplete="off" aria-describedby="amount-err">
+            <p class="err" id="amount-err" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="accountReference">Account reference</label>
+            <input id="accountReference" name="accountReference" type="text" autocomplete="off" aria-describedby="accountReference-hint accountReference-err">
+            <p class="hint" id="accountReference-hint">Also used as the order number. Up to 12 characters.</p>
+            <p class="err" id="accountReference-err" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="transactionDesc">Description</label>
+            <input id="transactionDesc" name="transactionDesc" type="text" autocomplete="off" aria-describedby="transactionDesc-hint transactionDesc-err">
+            <p class="hint" id="transactionDesc-hint">Up to 13 characters.</p>
+            <p class="err" id="transactionDesc-err" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="callbackUrl">Callback URL</label>
+            <input id="callbackUrl" name="callbackUrl" type="text" inputmode="url" autocomplete="off" aria-describedby="callbackUrl-hint callbackUrl-err">
+            <p class="hint" id="callbackUrl-hint">Where Daraja posts the result. Nothing is requested from it here.</p>
+            <p class="err" id="callbackUrl-err" hidden></p>
+          </div>
+
+          <fieldset class="field choice">
+            <legend>Transaction type</legend>
+            <label class="radio"><input type="radio" name="type" value="CustomerPayBillOnline"> Paybill</label>
+            <label class="radio"><input type="radio" name="type" value="CustomerBuyGoodsOnline"> Buy goods (till)</label>
+          </fieldset>
+
+          <div class="field" id="partyB-field" hidden>
+            <label for="partyB">Till number (PartyB)</label>
+            <input id="partyB" name="partyB" type="text" inputmode="numeric" autocomplete="off" aria-describedby="partyB-err">
+            <p class="err" id="partyB-err" hidden></p>
+          </div>
+
+          <details class="settings">
+            <summary>Client settings (all fake)</summary>
+            <dl>
+              <div><dt>Base URL</dt><dd><code>http://127.0.0.1:4150</code> (the mock)</dd></div>
+              <div><dt>Short code</dt><dd><code>174379</code></dd></div>
+              <div><dt>Consumer key</dt><dd><code>mock-consumer-key</code></dd></div>
+              <div><dt>Consumer secret</dt><dd><code>mock-consumer-secret</code></dd></div>
+              <div><dt>Passkey</dt><dd><code>mock-passkey-not-a-real-secret</code></dd></div>
+            </dl>
+            <p class="small">These are the mock server's built-in development values from <code>MockConfig</code>. They are not credentials for anything.</p>
+          </details>
+
+          <h3><span class="num" aria-hidden="true">2</span>How the mock answers</h3>
+          <div id="scenarios"></div>
+
+          <div class="actions">
+            <button type="submit" class="primary">Send STK push</button>
+            <button type="button" id="reset">Reset</button>
+          </div>
+          <p class="small">Your entries are kept in this browser only, in local storage. Reset restores the seed values and clears the simulated server.</p>
+        </form>
+      </div>
+
+      <section id="output" class="output" aria-labelledby="h-out" tabindex="-1">
+        <h3 id="h-out"><span class="num" aria-hidden="true">3</span>What happened</h3>
+        <p class="sr-only" id="announce" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div id="result"></div>
+        <div class="trace-tools">
+          <button type="button" id="redeliver">Deliver the last callback again</button>
+          <label class="check"><input type="checkbox" id="compact"> Show JSON as sent, on one line</label>
+        </div>
+        <p class="small">Waits in the steps below are simulated: the demo skips ahead instead of making you wait. They are not measurements.</p>
+        <ol id="trace" class="trace" aria-label="Steps in order"></ol>
+      </section>
+    </div>
+  </section>
+
+  <section id="how" class="prose" aria-labelledby="h-how">
+    <h2 id="h-how">How this demo works</h2>
+    <p><strong>The PHP library is not running in this page.</strong> This is a JavaScript port of its pure parts, checked against the real PHP code. I did not try PHP compiled to WebAssembly: the mock server needs SQLite, cURL and a separate worker process, so it would not have run without changing the library.</p>
+
+    <div class="cols">
+      <div>
+        <h3>Ported from the library</h3>
+        <ul>
+          <li>Phone normalisation, whole-shilling amounts and request validation, with the library's error messages.</li>
+          <li>The East Africa Time timestamp and the base64 Password.</li>
+          <li>The exact OAuth and STK requests, headers and JSON bodies, and the token cache.</li>
+          <li>The strict callback parser, the result code mapping and the amount and phone cross-check.</li>
+          <li>The idempotency state machine behind <code>CallbackProcessor</code>.</li>
+          <li>The mock server's validation, error bodies, bearer tokens, callback bodies and retry schedule.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Simulated here</h3>
+        <ul>
+          <li>The network: a request is a function call.</li>
+          <li>The phone and the customer: you choose the answer.</li>
+          <li>The clock: it starts at your device time and jumps over waits.</li>
+          <li>Ids and receipts: invented from a seeded generator.</li>
+          <li>The shop that owns the order: a small in-memory port of <code>examples/plain-php</code>.</li>
+          <li>Three scenarios the mock cannot produce on its own (marked in the list): a callback that overtakes your app, a stale cancel after a success, and a changed amount. The demo injects them.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Not shown</h3>
+        <ul>
+          <li>C2B, B2C, Transaction Status and Reversal.</li>
+          <li>The source IP allow-list and the SQLite idempotency store with its <code>UNIQUE</code> receipt lock.</li>
+          <li>Early token refresh and the Laravel snippets.</li>
+          <li>The mock's own web console with the simulated phone.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p><strong>How the port is kept honest.</strong> <code>demo/tools/golden.php</code> runs a set of inputs through the real PHP code, including the real client talking to the real mock in process, and writes the answers to <code>demo/test/golden.json</code>. The port must reproduce them exactly. CI fails if the PHP library changes and the file is not regenerated, or if the port disagrees.</p>
+
+    <p><strong>What is not verified.</strong> Like the library, this demo has never been run against Safaricom's sandbox or live API. It shows how daraja-php behaves against its own mock, not how Daraja behaves. Request and callback shapes follow Safaricom's public documentation.</p>
+
+    <p><strong>Your data.</strong> Nothing leaves the page. The form values are saved in this browser's local storage so a reload keeps them. After the first load the page also works offline.</p>
+  </section>
+
+  <section id="php" class="prose" aria-labelledby="h-php">
+    <h2 id="h-php">PHP snippets</h2>
+    <p>These are cut word for word from the <code>examples/plain-php</code> app in the repository. A script re-cuts them in CI and fails if the example changed, so the page cannot show stale code.</p>
+    <div id="snippets"></div>
+  </section>
+
+  <section id="run" class="prose" aria-labelledby="h-run">
+    <h2 id="h-run">Run the real thing</h2>
+    <p>Needs PHP 8.3 or newer with <code>curl</code> and <code>pdo_sqlite</code>, and Composer. Nothing needs the internet except <code>composer install</code>.</p>
+    <div id="quickstart"></div>
+    <p>Open the shop, press <strong>Pay now</strong>, then answer the prompt on the phone in the console. Tick <strong>Lose the callback</strong> first to practise the STK query path, or press <strong>Redeliver (duplicate)</strong> to check the order is credited once.</p>
+  </section>
+</main>
+
+<footer>
+  <p>daraja-php by Victor Wambua, MIT licence. <a href="https://github.com/Victor-Wambua/daraja-php">Source</a> · <a href="https://github.com/Victor-Wambua/daraja-php/blob/main/docs/CASE-STUDY.md">Case study</a> · <a href="https://github.com/Victor-Wambua/daraja-php/blob/main/docs/GOING-LIVE.md">Going live checklist</a></p>
+</footer>
+</body>
+</html>

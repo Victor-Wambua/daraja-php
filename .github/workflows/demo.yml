@@ -1,0 +1,51 @@
+name: Demo
+
+on:
+  push:
+    branches: [main]
+    paths: ['demo/**', 'src/**', 'tests/Fixtures/**', 'examples/**', 'README.md', '.github/workflows/demo.yml']
+  pull_request:
+    paths: ['demo/**', 'src/**', 'tests/Fixtures/**', 'examples/**', 'README.md', '.github/workflows/demo.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    name: Port matches the PHP library
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: curl, mbstring, openssl, pdo_sqlite, sqlite3
+          coverage: none
+          tools: composer:v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: composer install --no-interaction --prefer-dist --no-progress
+      - name: golden.json must match what the real PHP code gives now
+        run: php demo/tools/golden.php --check
+      - name: PHP snippets must match the example files
+        run: node demo/tools/snippets.mjs --check
+      - name: Port tests and scenario tests
+        run: node --test demo/test/port.test.mjs demo/test/engine.test.mjs
+
+  smoke:
+    name: Browser smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: demo/package-lock.json
+      - run: npm ci
+        working-directory: demo
+      - run: npx playwright install --with-deps chromium
+        working-directory: demo
+      - run: npm run smoke
+        working-directory: demo
