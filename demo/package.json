@@ -12,6 +12,6 @@
     "snippets:check": "node tools/snippets.mjs --check"
   },
   "devDependencies": {
-    "playwright": "1.56.1"
+    "playwright": "1.65.1"
   }
 }

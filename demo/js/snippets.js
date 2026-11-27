@@ -50,7 +50,7 @@ export const QUICKSTART = {
   "id": "quickstart",
   "title": "Quick start",
   "file": "README.md",
-  "startLine": 53,
-  "endLine": 58,
+  "startLine": 72,
+  "endLine": 77,
   "code": "git clone https://github.com/Victor-Wambua/daraja-php.git\ncd daraja-php\ncomposer install\n\nbin/daraja-mock                                       # terminal 1: console at http://127.0.0.1:4150\nphp -S 127.0.0.1:4151 -t examples/plain-php/public    # terminal 2: example shop at http://127.0.0.1:4151"
 };
